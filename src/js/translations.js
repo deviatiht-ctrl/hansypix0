@@ -13,7 +13,7 @@
             "nav.sign_up": "Sign Up",
             "nav.account": "Account",
 
-            "hero.title": "Capturing Moments,<br>Creating Memories",
+            "hero.title": "HANSYPIX",
             "hero.subtitle": "A portrait photographer based in Port-au-Prince, specializing in professional portraits, business headshots, and creative projects.",
             "hero.book_session": "Book a Session",
             "hero.view_portfolio": "View Portfolio",
@@ -94,7 +94,7 @@
             "nav.sign_up": "S inscrire",
             "nav.account": "Compte",
 
-            "hero.title": "Capturer des Moments,<br>Creer des Souvenirs",
+            "hero.title": "HANSYPIX",
             "hero.subtitle": "Services de photographie professionnelle pour chaque occasion",
             "hero.book_session": "Reserver une Seance",
             "hero.view_portfolio": "Voir le Portfolio",

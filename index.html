@@ -29,13 +29,13 @@
     <link rel="apple-touch-icon" href="/src/logo.png">
     <link rel="manifest" href="/manifest.js?v=20260507on">
 
-    <title>HANSYPIX - Professional Photography | Capturing Moments, Creating Memories</title>
+    <title>HANSYPIX - Professional Photography</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@800&family=Syne:wght@800&display=swap"
         rel="stylesheet">
 
     <!-- Lucide Icons -->
@@ -56,6 +56,55 @@
     <link rel="stylesheet" href="/src/css/mobile.css?v=20260507">
     <link rel="stylesheet" href="/src/css/pwa.css?v=20260507">
     <link rel="stylesheet" href="/src/css/translations.css?v=20260507">
+
+    <style>
+        .hero-title-brand {
+            font-family: 'Syne', sans-serif !important;
+            font-size: clamp(3.5rem, 12vw, 10rem) !important;
+            font-weight: 800 !important;
+            letter-spacing: -0.05em !important;
+            text-transform: uppercase !important;
+            background: linear-gradient(135deg, #ffffff 0%, #a5a5a5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem !important;
+            line-height: 0.9 !important;
+            filter: drop-shadow(0 0 30px rgba(255,255,255,0.1));
+            animation: heroTitleIn 1.2s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes heroTitleIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .services-grid-custom {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .services-grid-custom .service-card {
+            flex: 0 0 calc(33.333% - 20px);
+            max-width: calc(33.333% - 20px);
+            min-width: 300px;
+        }
+
+        @media (max-width: 1100px) {
+            .services-grid-custom .service-card {
+                flex: 0 0 calc(50% - 15px);
+                max-width: calc(50% - 15px);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .services-grid-custom .service-card {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -149,11 +198,11 @@
 
         <!-- Hero Content -->
         <div class="hero-content">
-            <h1 class="hero-title" id="heroTitle" data-translate="hero.title">
-                Capturing Moments,<br>Creating Memories
+            <h1 class="hero-title hero-title-brand" id="heroTitle" data-translate="hero.title">
+                HANSYPIX
             </h1>
             <p class="hero-subtitle" id="heroSubtitle" data-translate="hero.subtitle">
-                Professional photography services for every occasion
+               A portrait photographer based in Port-au-Prince, specializing in professional portraits, business headshots, and creative projects.
             </p>
             <div class="hero-cta">
                 <a href="/src/pages/pricing.html" class="btn-primary btn-large" data-translate="hero.book_session">
@@ -220,7 +269,7 @@
                 <p class="section-subtitle" data-translate="services.subtitle">Professional photography for every moment</p>
             </div>
 
-            <div class="services-grid">
+            <div class="services-grid-custom">
                 <!-- Personal Portrait Session -->
                 <div class="service-card glass-card">
                     <div class="service-icon">
