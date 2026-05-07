@@ -5,8 +5,8 @@
  * Get them from: https://app.supabase.com/project/_/settings/api
  */
 
-const SUPABASE_URL = 'https://uawbgdiafdxnrdnmyxpr.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVhd2JnZGlhZmR4bnJkbm15eHByIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1MDE3MTAsImV4cCI6MjA4NzA3NzcxMH0._Mj3b4DQ2FQjcTaGNQ7BU_-093mKOyF48mdRluHShZY';
+const SUPABASE_URL = 'https://rcyyziugbltokxkzzuwg.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJjeXl6aXVnYmx0b2t4a3p6dXdnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNDY2NjgsImV4cCI6MjA5MzcyMjY2OH0.NGh7tU4kLIL7O6h79RnBEVtnSUpICsh-PudFqYDMt0A';
 
 /**
  * Initialize Supabase client
