@@ -14,19 +14,22 @@
             "nav.account": "Account",
 
             "hero.title": "Capturing Moments,<br>Creating Memories",
-            "hero.subtitle": "Professional photography services for every occasion",
+            "hero.subtitle": "A portrait photographer based in Port-au-Prince, specializing in professional portraits, business headshots, and creative projects.",
             "hero.book_session": "Book a Session",
             "hero.view_portfolio": "View Portfolio",
 
             "services.title": "Our Services",
             "services.subtitle": "Professional photography for every moment",
             
-            "services.studio_title": "Studio Photography",
+            "services.studio_title": "Personal portrait session ",
             "services.studio_description": "Professional studio sessions with state-of-the-art lighting and equipment. Perfect for headshots, portraits, and product photography.",
             "services.studio_link": "View Studio Work <i data-lucide='arrow-right'></i>",
+            "services.business_title": "Business headshot",
+            "services.business_description": "Professional images for LinkedIn, CV, and your business",
+            "services.business_link": "View Studio Work <i data-lucide='arrow-right'></i>",
             
-            "services.outdoor_title": "Outdoor Sessions",
-            "services.outdoor_description": "Natural light photography in stunning outdoor locations. Engagement shoots, family portraits, and lifestyle photography.",
+            "services.outdoor_title": "Artistic Project",
+            "services.outdoor_description": "artistc,editorial,fashion,or portfolio concepts",
             "services.outdoor_link": "View Outdoor Work <i data-lucide='arrow-right'></i>",
             
             "services.event_title": "Event Coverage",
@@ -37,7 +40,7 @@
             "services.video_description": "Cinematic video production for weddings, events, and promotional content. Professional editing and storytelling.",
             "services.video_link": "View Video Work <i data-lucide='arrow-right'></i>",
 
-            "about.title": "About HANSYPIX",
+            "about.title": "About ",
             "about.description": "HANSYPIX is a premier photography studio specializing in studio, outdoor, event, and video production. With years of experience and a passion for visual storytelling, we capture your most precious moments with artistic excellence.",
             "about.description2": "Our team of professional photographers combines technical expertise with creative vision to deliver stunning images that you'll treasure forever. From intimate portraits to grand celebrations, we're dedicated to exceeding your expectations.",
             "about.happy_clients": "Happy Clients",
@@ -99,9 +102,12 @@
             "services.title": "Nos Services",
             "services.subtitle": "Photographie professionnelle pour chaque moment",
             
-            "services.studio_title": "Photographie en Studio",
+            "services.studio_title": "Personal portrait session ",
             "services.studio_description": "Séances professionnelles en studio avec un équipement et un éclairage de pointe. Parfait pour les portraits et la photographie de produits.",
             "services.studio_link": "Voir le Travail en Studio <i data-lucide='arrow-right'></i>",
+            "services.business_title": "Business headshot",
+            "services.business_description": "Professional images for LinkedIn, CV, and your business",
+            "services.business_link": "View Studio Work <i data-lucide='arrow-right'></i>",
             
             "services.outdoor_title": "Séances en Extérieur",
             "services.outdoor_description": "Photographie en lumière naturelle dans des lieux extérieurs époustouflants. Fiançailles, portraits de famille et style de vie.",
