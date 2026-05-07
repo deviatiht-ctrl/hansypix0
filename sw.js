@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hansypix-v2026-03-08-5';
+const CACHE_NAME = 'hansypix-v2026-05-07-1';
 
 const STATIC_ASSETS = [
   '/',
