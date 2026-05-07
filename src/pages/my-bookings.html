@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View and manage your photography session bookings with HANSYPIX.">
+    <title>My Bookings - HANSYPIX Professional Photography</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="HANSYPIX">
+    <link rel="apple-touch-icon" href="../logo.png">
+    <link rel="manifest" href="../../manifest.json">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/bookings.css">
+    <link rel="stylesheet" href="../css/chat.css">
+    <link rel="stylesheet" href="../css/mobile.css?v=7">
+    <link rel="stylesheet" href="../css/pwa.css">
+    <link rel="stylesheet" href="../css/translations.css?v=20260308-5">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <a href="index.html" class="nav-logo">
+                <img src="../logo.png" alt="HANSYPIX Logo" class="logo-image">
+                <span>HANSYPIX</span>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <!-- Auth Buttons -->
+            <div class="nav-auth" id="navAuth">
+                <!-- Will be populated by JavaScript -->
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1 class="page-title">My Bookings</h1>
+                <p class="page-subtitle">View and manage your photography session bookings</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bookings Section -->
+    <section class="bookings-section">
+        <div class="container">
+            <!-- Filter Tabs -->
+            <div class="booking-filters">
+                <button class="filter-btn active" data-status="all">
+                    All Bookings
+                </button>
+                <button class="filter-btn" data-status="pending">
+                    <i data-lucide="clock"></i>
+                    Pending
+                </button>
+                <button class="filter-btn" data-status="confirmed">
+                    <i data-lucide="check-circle"></i>
+                    Confirmed
+                </button>
+                <button class="filter-btn" data-status="completed">
+                    <i data-lucide="check"></i>
+                    Completed
+                </button>
+                <button class="filter-btn" data-status="cancelled">
+                    <i data-lucide="x-circle"></i>
+                    Cancelled
+                </button>
+            </div>
+
+            <!-- Bookings List -->
+            <div class="bookings-list" id="bookingsList">
+                <!-- Bookings will be loaded here -->
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Loading your bookings...</p>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination" style="display: none;">
+                <button class="pagination-btn" id="prevBtn" disabled>
+                    <i data-lucide="chevron-left"></i>
+                    Previous
+                </button>
+                <div class="pagination-info" id="paginationInfo">
+                    Page <span id="currentPage">1</span> of <span id="totalPages">1</span>
+                </div>
+                <button class="pagination-btn" id="nextBtn" disabled>
+                    Next
+                    <i data-lucide="chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Details Modal -->
+    <div class="modal" id="bookingModal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content booking-modal-content">
+            <button class="modal-close" id="closeModalBtn">
+                <i data-lucide="x"></i>
+            </button>
+            <div id="bookingDetails">
+                <!-- Booking details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav">
+        <a href="/src/pages/index.html" class="mobile-nav-item">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="/src/pages/portfolio.html" class="mobile-nav-item">
+            <i data-lucide="image"></i>
+            <span>Portfolio</span>
+        </a>
+        <a href="/src/pages/pricing.html" class="mobile-nav-item">
+            <i data-lucide="tag"></i>
+            <span>Pricing</span>
+        </a>
+        <a href="/src/pages/contact.html" class="mobile-nav-item">
+            <i data-lucide="message-circle"></i>
+            <span>Contact</span>
+        </a>
+        <a href="#" class="mobile-nav-item" id="mobileAccountBtn">
+            <i data-lucide="user"></i>
+            <span id="mobileAccountLabel">Account</span>
+        </a>
+    </nav>
+
+    <!-- Mobile Account Menu (Hidden by default) -->
+    <div class="mobile-account-menu" id="mobileAccountMenu" style="display: none;">
+        <div class="account-menu-content glass-card">
+            <a href="/src/pages/admin/dashboard.html" class="account-menu-item" id="mobileAdminLink" style="display: none;">
+                <i data-lucide="shield"></i>
+                <span>Admin Panel</span>
+            </a>
+            <a href="/src/pages/profile.html" class="account-menu-item">
+                <i data-lucide="user"></i>
+                <span>My Profile</span>
+            </a>
+            <a href="/src/pages/my-bookings.html" class="account-menu-item active">
+                <i data-lucide="calendar"></i>
+                <span>My Bookings</span>
+            </a>
+            <hr class="menu-divider">
+            <a href="#" class="account-menu-item logout-link" id="mobileLogoutBtn">
+                <i data-lucide="log-out"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="../supabase/config.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/translations.js?v=20260308-5"></script>
+    <script src="../js/navigation.js?v=6"></script>
+    <script src="../js/mobile-nav.js?v=8"></script>
+    <script src="../js/my-bookings.js?v=2000"></script>
+    <script src="../js/pwa-install.js"></script>
+    
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+

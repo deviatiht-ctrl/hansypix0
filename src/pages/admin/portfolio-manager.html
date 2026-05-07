@@ -1,0 +1,340 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Manager - HANSYPIX Admin</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+</head>
+<body class="admin-body">
+    <!-- Admin Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="admin-logo">
+                <img src="../../logo.png" alt="HANSYPIX Logo" class="logo-image">
+                <span>HANSYPIX</span>
+            </a>
+            <span class="admin-badge">Admin</span>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="portfolio-manager.html" class="nav-item active">
+                <i data-lucide="image"></i>
+                <span>Portfolio</span>
+            </a>
+            <a href="site-settings.html" class="nav-item">
+                <i data-lucide="settings"></i>
+                <span>Site Settings</span>
+            </a>
+            <a href="users.html" class="nav-item">
+                <i data-lucide="users"></i>
+                <span>Users</span>
+            </a>
+            <a href="messages.html" class="nav-item">
+                <i data-lucide="message-circle"></i>
+                <span>Messages</span>
+                <span class="badge" id="unreadMessagesBadge">0</span>
+            </a>
+            <a href="bookings.html" class="nav-item">
+                <i data-lucide="calendar"></i>
+                <span>Bookings</span>
+            </a>
+            <a href="payments.html" class="nav-item">
+                <i data-lucide="credit-card"></i>
+                <span>Payments</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="../index.html" class="nav-item">
+                <i data-lucide="arrow-left"></i>
+                <span>Back to Site</span>
+            </a>
+            <button class="nav-item" id="adminLogout">
+                <i data-lucide="log-out"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="admin-main">
+        <!-- Top Bar -->
+        <header class="admin-header">
+            <button class="mobile-sidebar-toggle" id="mobileSidebarToggle">
+                <i data-lucide="menu"></i>
+            </button>
+            
+            <h1 class="page-title">Portfolio Manager</h1>
+            
+            <div class="header-actions">
+                <button class="btn-primary" id="uploadMediaBtn">
+                    <i data-lucide="upload"></i>
+                    Upload Media
+                </button>
+            </div>
+        </header>
+        
+        <!-- Portfolio Content -->
+        <div class="admin-content">
+            <!-- Filters -->
+            <div class="content-filters glass-card">
+                <div class="filter-group">
+                    <label>Category</label>
+                    <select id="categoryFilter">
+                        <option value="all">All Categories</option>
+                        <option value="studio">Studio</option>
+                        <option value="outdoor">Outdoor</option>
+                        <option value="events">Events</option>
+                        <option value="video">Video</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Media Type</label>
+                    <select id="mediaTypeFilter">
+                        <option value="all">All Types</option>
+                        <option value="image">Images</option>
+                        <option value="video">Videos</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Featured</label>
+                    <select id="featuredFilter">
+                        <option value="all">All Items</option>
+                        <option value="true">Featured Only</option>
+                        <option value="false">Not Featured</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Search</label>
+                    <input type="text" id="searchInput" placeholder="Search by title...">
+                </div>
+            </div>
+            
+            <!-- Portfolio Grid -->
+            <div class="portfolio-manager-grid" id="portfolioGrid">
+                <!-- Portfolio items will be loaded here -->
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Loading portfolio items...</p>
+                </div>
+            </div>
+            
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <i data-lucide="image-off"></i>
+                <h3>No portfolio items found</h3>
+                <p>Upload your first photo or video to get started</p>
+                <button class="btn-primary" id="uploadFirstBtn">
+                    <i data-lucide="upload"></i>
+                    Upload Media
+                </button>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Upload Modal -->
+    <div class="modal" id="uploadModal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content glass-card large">
+            <div class="modal-header">
+                <h3 class="modal-title">Upload Media</h3>
+                <button class="modal-close" id="closeUploadModal">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <form id="uploadForm" class="upload-form">
+                <!-- File Upload Area -->
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" accept="image/*,video/*" multiple hidden>
+                    <div class="upload-placeholder">
+                        <i data-lucide="upload-cloud"></i>
+                        <h4>Drag & drop files here</h4>
+                        <p>or click to browse</p>
+                        <small>Supports: JPG, PNG, WebP, MP4, WebM (Max 100MB)</small>
+                    </div>
+                </div>
+                
+                <!-- File Preview -->
+                <div class="file-preview" id="filePreview" style="display: none;">
+                    <!-- Previews will be added here -->
+                </div>
+                
+                <!-- Upload Details -->
+                <div class="upload-details" id="uploadDetails" style="display: none;">
+                    <div class="form-group">
+                        <label for="uploadTitle">
+                            <i data-lucide="type"></i>
+                            Title *
+                        </label>
+                        <input type="text" id="uploadTitle" required placeholder="Enter a title">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="uploadDescription">
+                            <i data-lucide="align-left"></i>
+                            Description
+                        </label>
+                        <textarea id="uploadDescription" rows="3" placeholder="Add a description..."></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="uploadCategory">
+                                <i data-lucide="folder"></i>
+                                Category *
+                            </label>
+                            <select id="uploadCategory" required>
+                                <option value="">Select category</option>
+                                <option value="studio">Studio</option>
+                                <option value="outdoor">Outdoor</option>
+                                <option value="events">Events</option>
+                                <option value="video">Video</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="uploadTags">
+                                <i data-lucide="tag"></i>
+                                Tags
+                            </label>
+                            <input type="text" id="uploadTags" placeholder="wedding, portrait, outdoor">
+                            <small>Separate tags with commas</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="uploadFeatured">
+                            <span>Mark as featured</span>
+                        </label>
+                    </div>
+                    
+                    <div class="upload-progress" id="uploadProgress" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <p class="progress-text" id="progressText">Uploading... 0%</p>
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button type="button" class="btn-secondary" id="cancelUpload">Cancel</button>
+                        <button type="submit" class="btn-primary" id="submitUpload">
+                            <i data-lucide="upload"></i>
+                            Upload
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Edit Modal -->
+    <div class="modal" id="editModal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Portfolio Item</h3>
+                <button class="modal-close" id="closeEditModal">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <form id="editForm">
+                <input type="hidden" id="editItemId">
+                
+                <div class="form-group">
+                    <label for="editTitle">Title *</label>
+                    <input type="text" id="editTitle" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editDescription">Description</label>
+                    <textarea id="editDescription" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editCategory">Category *</label>
+                    <select id="editCategory" required>
+                        <option value="studio">Studio</option>
+                        <option value="outdoor">Outdoor</option>
+                        <option value="events">Events</option>
+                        <option value="video">Video</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editTags">Tags</label>
+                    <input type="text" id="editTags" placeholder="wedding, portrait, outdoor">
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="editFeatured">
+                        <span>Mark as featured</span>
+                    </label>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancelEdit">Cancel</button>
+                    <button type="submit" class="btn-primary">
+                        <i data-lucide="save"></i>
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="deleteModal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content glass-card">
+            <div class="modal-icon danger">
+                <i data-lucide="alert-triangle"></i>
+            </div>
+            <h3 class="modal-title">Delete Portfolio Item?</h3>
+            <p class="modal-text">This action cannot be undone. The file will be permanently deleted from storage.</p>
+            
+            <div class="modal-actions">
+                <button class="btn-secondary" id="cancelDelete">Cancel</button>
+                <button class="btn-danger" id="confirmDelete">
+                    <i data-lucide="trash-2"></i>
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <!-- Supabase CDN - Must load first -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="../../supabase/config.js"></script>
+    <script src="../../js/config.js"></script>
+    <script src="../../js/admin/auth-check.js?v=2"></script>
+    <script src="../../js/admin/portfolio-manager.js"></script>
+    
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

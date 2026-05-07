@@ -1,0 +1,429 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete your booking and payment for HANSYPIX photography services.">
+    <title>Checkout - HANSYPIX Professional Photography</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Stripe -->
+    <script src="https://js.stripe.com/v3/"></script>
+    
+    <!-- PayPal -->
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/checkout.css">
+    <link rel="stylesheet" href="../css/chat.css">
+    <link rel="stylesheet" href="../css/footer-modern.css?v=1">
+    <link rel="stylesheet" href="../css/mobile.css?v=7">
+    <link rel="stylesheet" href="../css/translations.css?v=20260308-5">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="../logo.png" alt="HANSYPIX Logo" class="logo-image">
+                <span>HANSYPIX</span>
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <div class="nav-auth" id="navAuth">
+                <div class="user-menu" id="userMenu">
+                    <button class="user-avatar" id="userAvatar">
+                        <i data-lucide="user"></i>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="admin/dashboard.html" id="adminLink" style="display: none;">
+                            <i data-lucide="shield"></i>
+                            Admin Panel
+                        </a>
+                        <a href="#" id="profileLink">
+                            <i data-lucide="user"></i>
+                            Profile
+                        </a>
+                        <a href="my-bookings.html" id="bookingsLink">
+                            <i data-lucide="calendar"></i>
+                            My Bookings
+                        </a>
+                        <a href="#" id="logoutBtn">
+                            <i data-lucide="log-out"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <section class="page-header small">
+        <div class="page-header-overlay"></div>
+        <div class="container">
+            <h1 class="page-title">Checkout</h1>
+            <p class="page-subtitle">Complete your booking</p>
+        </div>
+    </section>
+    
+    <!-- Checkout Section -->
+    <section class="checkout-section">
+        <div class="container">
+            <div class="checkout-grid">
+                <!-- Checkout Form -->
+                <div class="checkout-form-container">
+                    <!-- Step Indicator -->
+                    <div class="checkout-steps">
+                        <div class="step active" data-step="1">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Details</div>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step" data-step="2">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Payment</div>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step" data-step="3">
+                            <div class="step-number">3</div>
+                            <div class="step-label">Confirm</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 1: Booking Details -->
+                    <div class="checkout-step-content active" id="step1">
+                        <div class="glass-card">
+                            <h2 class="section-title">Booking Details</h2>
+                            
+                            <form id="bookingDetailsForm">
+                                <div class="form-group">
+                                    <label for="preferredDate">
+                                        <i data-lucide="calendar"></i>
+                                        Preferred Date *
+                                    </label>
+                                    <input type="date" id="preferredDate" name="preferredDate" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="preferredTime">
+                                        <i data-lucide="clock"></i>
+                                        Preferred Time *
+                                    </label>
+                                    <select id="preferredTime" name="preferredTime" required>
+                                        <option value="">Select a time</option>
+                                        <option value="09:00">9:00 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="12:00">12:00 PM</option>
+                                        <option value="13:00">1:00 PM</option>
+                                        <option value="14:00">2:00 PM</option>
+                                        <option value="15:00">3:00 PM</option>
+                                        <option value="16:00">4:00 PM</option>
+                                        <option value="17:00">5:00 PM</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="location">
+                                        <i data-lucide="map-pin"></i>
+                                        Location *
+                                    </label>
+                                    <select id="location" name="location" required>
+                                        <option value="">Select a location</option>
+                                        <option value="studio">Our Studio</option>
+                                        <option value="outdoor">Outdoor Location (TBD)</option>
+                                        <option value="client">Client's Location</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="specialRequests">
+                                        <i data-lucide="message-square"></i>
+                                        Special Requests (Optional)
+                                    </label>
+                                    <textarea id="specialRequests" name="specialRequests" rows="4" placeholder="Any special requirements or notes..."></textarea>
+                                </div>
+                                
+                                <button type="button" class="btn-primary btn-large btn-full" id="nextToPayment">
+                                    Continue to Payment
+                                    <i data-lucide="arrow-right"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Payment Method -->
+                    <div class="checkout-step-content" id="step2">
+                        <div class="glass-card">
+                            <h2 class="section-title">Payment Method</h2>
+                            
+                            <div class="payment-methods">
+                                <!-- Stripe -->
+                                <div class="payment-method-card" data-method="stripe">
+                                    <input type="radio" name="paymentMethod" id="stripeMethod" value="stripe" checked>
+                                    <label for="stripeMethod">
+                                        <div class="payment-method-icon">
+                                            <i data-lucide="credit-card"></i>
+                                        </div>
+                                        <div class="payment-method-info">
+                                            <h4>Credit/Debit Card</h4>
+                                            <p>Pay securely with Stripe</p>
+                                        </div>
+                                        <div class="payment-method-check">
+                                            <i data-lucide="check-circle"></i>
+                                        </div>
+                                    </label>
+                                </div>
+                                
+                                <!-- PayPal -->
+                                <div class="payment-method-card" data-method="paypal">
+                                    <input type="radio" name="paymentMethod" id="paypalMethod" value="paypal">
+                                    <label for="paypalMethod">
+                                        <div class="payment-method-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.77.77 0 0 1 .76-.653h8.025c2.963 0 4.97 1.138 5.654 3.208.686 2.07.07 4.646-1.737 7.26-1.806 2.614-4.353 3.934-7.177 3.934H8.832l-.76 4.868z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="payment-method-info">
+                                            <h4>PayPal</h4>
+                                            <p>Pay with your PayPal account</p>
+                                        </div>
+                                        <div class="payment-method-check">
+                                            <i data-lucide="check-circle"></i>
+                                        </div>
+                                    </label>
+                                </div>
+                                
+                                <!-- MonCash -->
+                                <div class="payment-method-card" data-method="moncash">
+                                    <input type="radio" name="paymentMethod" id="moncashMethod" value="moncash">
+                                    <label for="moncashMethod">
+                                        <div class="payment-method-icon">
+                                            <i data-lucide="smartphone"></i>
+                                        </div>
+                                        <div class="payment-method-info">
+                                            <h4>MonCash</h4>
+                                            <p>Mobile money payment (Haiti)</p>
+                                        </div>
+                                        <div class="payment-method-check">
+                                            <i data-lucide="check-circle"></i>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Stripe Card Element -->
+                            <div id="stripePaymentForm" class="payment-form">
+                                <div class="form-group">
+                                    <label>Card Details</label>
+                                    <div id="card-element" class="stripe-element"></div>
+                                    <div id="card-errors" class="payment-error"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- PayPal Button Container -->
+                            <div id="paypalPaymentForm" class="payment-form" style="display: none;">
+                                <div id="paypal-button-container"></div>
+                            </div>
+                            
+                            <!-- MonCash Form -->
+                            <div id="moncashPaymentForm" class="payment-form" style="display: none;">
+                                <div class="form-group">
+                                    <label for="moncashPhone">
+                                        <i data-lucide="smartphone"></i>
+                                        MonCash Phone Number
+                                    </label>
+                                    <input type="tel" id="moncashPhone" placeholder="+509 XXXX XXXX">
+                                </div>
+                                <p class="payment-note">You will receive a prompt on your phone to confirm the payment.</p>
+                            </div>
+                            
+                            <div class="checkout-actions">
+                                <button type="button" class="btn-secondary btn-large" id="backToDetails">
+                                    <i data-lucide="arrow-left"></i>
+                                    Back
+                                </button>
+                                <button type="button" class="btn-primary btn-large" id="proceedToConfirm">
+                                    Continue
+                                    <i data-lucide="arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Confirmation -->
+                    <div class="checkout-step-content" id="step3">
+                        <div class="glass-card">
+                            <h2 class="section-title">Review & Confirm</h2>
+                            
+                            <div class="confirmation-details">
+                                <div class="confirmation-section">
+                                    <h4><i data-lucide="calendar"></i> Booking Details</h4>
+                                    <div class="detail-row">
+                                        <span>Date:</span>
+                                        <strong id="confirmDate">-</strong>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span>Time:</span>
+                                        <strong id="confirmTime">-</strong>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span>Location:</span>
+                                        <strong id="confirmLocation">-</strong>
+                                    </div>
+                                </div>
+                                
+                                <div class="confirmation-section">
+                                    <h4><i data-lucide="credit-card"></i> Payment Method</h4>
+                                    <div class="detail-row">
+                                        <strong id="confirmPaymentMethod">-</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="terms-agreement">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="agreeTerms" required>
+                                    <span>I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Cancellation Policy</a></span>
+                                </label>
+                            </div>
+                            
+                            <div class="checkout-actions">
+                                <button type="button" class="btn-secondary btn-large" id="backToPayment">
+                                    <i data-lucide="arrow-left"></i>
+                                    Back
+                                </button>
+                                <button type="button" class="btn-primary btn-large" id="confirmBooking">
+                                    <i data-lucide="check-circle"></i>
+                                    Confirm & Pay
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Order Summary -->
+                <div class="order-summary-container">
+                    <div class="glass-card order-summary">
+                        <h3 class="summary-title">Order Summary</h3>
+                        
+                        <div class="package-info">
+                            <div class="package-header">
+                                <h4 id="packageName">Professional Package</h4>
+                                <div class="package-badge">Most Popular</div>
+                            </div>
+                            <p class="package-duration" id="packageDuration">2 hours session</p>
+                        </div>
+                        
+                        <div class="package-features" id="packageFeatures">
+                            <!-- Features will be loaded dynamically -->
+                        </div>
+                        
+                        <div class="price-breakdown">
+                            <div class="price-row">
+                                <span>Package Price</span>
+                                <strong id="packagePrice">$599.00</strong>
+                            </div>
+                            <div class="price-row">
+                                <span>Tax (10%)</span>
+                                <strong id="taxAmount">$59.90</strong>
+                            </div>
+                            <div class="price-row total">
+                                <span>Total</span>
+                                <strong id="totalAmount">$658.90</strong>
+                            </div>
+                        </div>
+                        
+                        <div class="security-badges">
+                            <div class="security-badge">
+                                <i data-lucide="shield-check"></i>
+                                <span>Secure Payment</span>
+                            </div>
+                            <div class="security-badge">
+                                <i data-lucide="lock"></i>
+                                <span>SSL Encrypted</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card help-card">
+                        <h4><i data-lucide="help-circle"></i> Need Help?</h4>
+                        <p>Have questions about your booking?</p>
+                        <a href="contact.html" class="help-link">
+                            Contact Support
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Success Modal -->
+    <div class="modal" id="successModal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content glass-card success-modal">
+            <div class="modal-icon success">
+                <i data-lucide="check-circle"></i>
+            </div>
+            <h3 class="modal-title">Booking Confirmed!</h3>
+            <p class="modal-text">Thank you for your booking. We've sent a confirmation email with all the details.</p>
+            <div class="booking-reference">
+                <span>Booking Reference:</span>
+                <strong id="bookingReference">-</strong>
+            </div>
+            <div class="modal-actions">
+                <a href="index.html" class="btn-secondary">Back to Home</a>
+                <a href="#" class="btn-primary" id="viewBookingBtn">View Booking</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer-modern">
+        <div class="footer-glow"></div>
+        <div class="container">
+            <div class="footer-bottom-bar" style="padding: 2rem 0;">
+                <div class="copyright"><span>&copy; 2026 HANSYPIX.</span><span class="separator">|</span><span>Crafted with <i data-lucide="heart" class="heart-icon"></i> for photographers</span></div>
+                <div class="footer-legal-links"><a href="#">Privacy Policy</a><span class="dot">â€¢</span><a href="#">Terms of Service</a></div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <!-- Supabase CDN - Must load first -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="../supabase/config.js?v=2000"></script>
+    <script src="../js/config.js?v=2000"></script>
+    <script src="../js/translations.js?v=20260308-5"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/payments/stripe.js?v=2000"></script>
+    <script src="../js/payments/paypal.js"></script>
+    <script src="../js/payments/moncash.js"></script>
+    <script src="../js/checkout.js?v=2000"></script>
+    
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

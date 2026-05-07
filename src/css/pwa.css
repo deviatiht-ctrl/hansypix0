@@ -1,0 +1,254 @@
+﻿.pwa-install-prompt {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+    animation: slideInUp 0.3s ease-out;
+}
+
+.pwa-install-prompt.pwa-hide {
+    animation: slideOutDown 0.3s ease-in;
+}
+
+.pwa-install-content {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    max-width: 320px;
+    position: relative;
+}
+
+.pwa-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.pwa-close-btn:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+.pwa-close-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.pwa-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.pwa-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.pwa-header h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+}
+
+.pwa-description {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    margin: 0 0 16px 0;
+    line-height: 1.5;
+}
+
+.pwa-device-info {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0;
+}
+
+.device-icon {
+    width: 48px;
+    height: 48px;
+    padding: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.device-icon.android-icon {
+    color: #3ddc84;
+    background: rgba(61, 220, 132, 0.1);
+}
+
+.device-icon.ios-icon {
+    color: #007aff;
+    background: rgba(0, 122, 255, 0.1);
+}
+
+.pwa-install-btn {
+    width: 100%;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pwa-install-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.pwa-install-btn:active {
+    transform: translateY(0);
+}
+
+.pwa-install-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* iOS-specific styles */
+.pwa-install-prompt.ios-prompt .pwa-install-content {
+    max-width: 340px;
+}
+
+.pwa-header-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.pwa-header-text h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.pwa-tagline {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 2px;
+}
+
+.pwa-ios-instructions {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 8px;
+}
+
+.pwa-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    margin: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    line-height: 1.4;
+}
+
+.pwa-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.pwa-step:first-child {
+    padding-top: 0;
+}
+
+.pwa-step .step-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    background: linear-gradient(135deg, #d4af37, #c9a961);
+    color: #000;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 50%;
+}
+
+.pwa-step strong {
+    color: #d4af37;
+}
+
+.pwa-step svg {
+    display: inline-block;
+    vertical-align: middle;
+    color: #007aff;
+    margin: 0 2px;
+}
+
+.pwa-ios-hint {
+    margin-top: 12px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.pwa-ios-hint svg {
+    width: 16px;
+    height: 16px;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutDown {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .pwa-install-prompt {
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+    }
+    
+    .pwa-install-content {
+        max-width: 100%;
+    }
+}

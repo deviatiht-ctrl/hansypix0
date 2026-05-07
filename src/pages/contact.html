@@ -1,0 +1,436 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get in touch with HANSYPIX. Contact us for bookings, inquiries, or any questions about our photography services.">
+    <title>Contact - HANSYPIX Professional Photography</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/global.css?v=2">
+    <link rel="stylesheet" href="../css/navigation.css?v=2">
+    <link rel="stylesheet" href="../css/contact.css?v=2">
+    <link rel="stylesheet" href="../css/animations.css?v=2">
+    <link rel="stylesheet" href="../css/chat.css?v=2">
+    <link rel="stylesheet" href="../css/footer-modern.css?v=1">
+    <link rel="stylesheet" href="../css/mobile.css?v=7">
+    <link rel="stylesheet" href="../css/translations.css?v=20260308-5">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="../logo.png" alt="HANSYPIX Logo" class="logo-image">
+                <span>HANSYPIX</span>
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link active">Contact</a></li>
+            </ul>
+            
+            <div class="nav-auth" id="navAuth">
+                <a href="/src/pages/login.html" class="btn-secondary" id="loginBtn">Login</a>
+                <a href="/src/pages/register.html" class="btn-primary" id="registerBtn">Sign Up</a>
+                
+                <div class="user-menu" id="userMenu" style="display: none;">
+                    <button class="user-avatar" id="userAvatar">
+                        <i data-lucide="user"></i>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="admin/dashboard.html" id="adminLink" style="display: none;">
+                            <i data-lucide="shield"></i>
+                            Admin Panel
+                        </a>
+                        <a href="#" id="profileLink">
+                            <i data-lucide="user"></i>
+                            Profile
+                        </a>
+                        <a href="my-bookings.html" id="bookingsLink">
+                            <i data-lucide="calendar"></i>
+                            My Bookings
+                        </a>
+                        <a href="#" id="logoutBtn">
+                            <i data-lucide="log-out"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-overlay"></div>
+        <div class="container">
+            <h1 class="page-title">Get in Touch</h1>
+            <p class="page-subtitle">We'd love to hear from you and discuss your photography needs</p>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form-container">
+                    <div class="glass-card">
+                        <h2 class="form-title">Send us a Message</h2>
+                        <p class="form-subtitle">Fill out the form below and we'll get back to you within 24 hours</p>
+                        
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-group">
+                                <label for="name">
+                                    <i data-lucide="user"></i>
+                                    Full Name *
+                                </label>
+                                <input type="text" id="name" name="name" required placeholder="John Doe">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">
+                                    <i data-lucide="mail"></i>
+                                    Email Address *
+                                </label>
+                                <input type="email" id="email" name="email" required placeholder="john@example.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">
+                                    <i data-lucide="phone"></i>
+                                    Phone Number
+                                </label>
+                                <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject">
+                                    <i data-lucide="tag"></i>
+                                    Subject *
+                                </label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="booking">Booking Inquiry</option>
+                                    <option value="pricing">Pricing Question</option>
+                                    <option value="portfolio">Portfolio Request</option>
+                                    <option value="general">General Question</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">
+                                    <i data-lucide="message-square"></i>
+                                    Message *
+                                </label>
+                                <textarea id="message" name="message" required rows="6" placeholder="Tell us about your photography needs..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary btn-large btn-full">
+                                <i data-lucide="send"></i>
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="contact-info-container">
+                    <!-- Contact Details -->
+                    <div class="glass-card contact-info-card">
+                        <h3 class="info-title">Contact Information</h3>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="mail"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Email</h4>
+                                <a href="mailto:contact@hansypix.com" id="contactEmail">contact@hansypix.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="phone"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Phone</h4>
+                                <a href="tel:+15551234567" id="contactPhone">+1 (555) 123-4567</a>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="map-pin"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Address</h4>
+                                <p>123 Photography Lane<br>Creative City, CC 12345</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i data-lucide="clock"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Business Hours</h4>
+                                <p>Monday - Friday: 9:00 AM - 6:00 PM<br>
+                                   Saturday: 10:00 AM - 4:00 PM<br>
+                                   Sunday: Closed</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Media -->
+                    <div class="glass-card social-card">
+                        <h3 class="info-title">Follow Us</h3>
+                        <p class="social-description">Stay connected and see our latest work</p>
+                        
+                        <div class="social-links-large">
+                            <a href="#" class="social-link-large" id="socialInstagramLarge">
+                                <i data-lucide="instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+                            <a href="#" class="social-link-large" id="socialFacebookLarge">
+                                <i data-lucide="facebook"></i>
+                                <span>Facebook</span>
+                            </a>
+                            <a href="#" class="social-link-large" id="socialTwitterLarge">
+                                <i data-lucide="twitter"></i>
+                                <span>Twitter</span>
+                            </a>
+                            <a href="#" class="social-link-large" id="socialYoutubeLarge">
+                                <i data-lucide="youtube"></i>
+                                <span>YouTube</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="glass-card quick-actions-card">
+                        <h3 class="info-title">Quick Actions</h3>
+                        
+                        <a href="pricing.html" class="quick-action-btn">
+                            <i data-lucide="calendar"></i>
+                            <span>Book a Session</span>
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                        
+                        <a href="portfolio.html" class="quick-action-btn">
+                            <i data-lucide="image"></i>
+                            <span>View Portfolio</span>
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                        
+                        <a href="pricing.html" class="quick-action-btn">
+                            <i data-lucide="tag"></i>
+                            <span>See Pricing</span>
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Find Us</h2>
+                <p class="section-subtitle">Visit our studio or schedule an on-location session</p>
+            </div>
+            
+            <div class="map-container glass-card">
+                <!-- Google Maps Placeholder -->
+                <div class="map-placeholder" id="map">
+                    <div class="map-placeholder-content">
+                        <i data-lucide="map-pin"></i>
+                        <p>Map will be loaded here</p>
+                        <small>Add your Google Maps API key to display the map</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer-modern">
+        <div class="footer-glow"></div>
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo">
+                        <div class="logo-icon"><i data-lucide="aperture"></i></div>
+                        <span class="logo-text">HANSYPIX</span>
+                    </a>
+                    <p class="footer-tagline">Capturing life's most beautiful moments through the art of photography</p>
+                    <div class="footer-newsletter">
+                        <h5>Stay Updated</h5>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Enter your email" class="newsletter-input">
+                            <button type="submit" class="newsletter-btn"><i data-lucide="arrow-right"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <h4 class="footer-column-title"><span class="title-accent"></span>Explore</h4>
+                        <ul class="footer-nav">
+                            <li><a href="index.html"><i data-lucide="chevron-right"></i>Home</a></li>
+                            <li><a href="portfolio.html"><i data-lucide="chevron-right"></i>Portfolio</a></li>
+                            <li><a href="pricing.html"><i data-lucide="chevron-right"></i>Pricing</a></li>
+                            <li><a href="contact.html"><i data-lucide="chevron-right"></i>Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-column-title"><span class="title-accent"></span>Services</h4>
+                        <ul class="footer-nav">
+                            <li><a href="portfolio.html?category=studio"><i data-lucide="chevron-right"></i>Studio Sessions</a></li>
+                            <li><a href="portfolio.html?category=outdoor"><i data-lucide="chevron-right"></i>Outdoor Shoots</a></li>
+                            <li><a href="portfolio.html?category=events"><i data-lucide="chevron-right"></i>Event Coverage</a></li>
+                            <li><a href="portfolio.html?category=video"><i data-lucide="chevron-right"></i>Videography</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-column-title"><span class="title-accent"></span>Get in Touch</h4>
+                        <ul class="footer-contact-list">
+                            <li><div class="contact-icon"><i data-lucide="mail"></i></div><div class="contact-info"><span class="contact-label">Email</span><a href="mailto:contact@hansypix.com" id="footerEmail">contact@hansypix.com</a></div></li>
+                            <li><div class="contact-icon"><i data-lucide="phone"></i></div><div class="contact-info"><span class="contact-label">Phone</span><a href="tel:+15551234567" id="footerPhone">+1 (555) 123-4567</a></div></li>
+                            <li><div class="contact-icon"><i data-lucide="map-pin"></i></div><div class="contact-info"><span class="contact-label">Location</span><span>Creative City, CC</span></div></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-social-bar">
+                <div class="social-text">Follow Us</div>
+                <div class="social-icons">
+                    <a href="#" class="social-icon-btn" id="socialInstagram" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                    <a href="#" class="social-icon-btn" id="socialFacebook" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                    <a href="#" class="social-icon-btn" id="socialTwitter" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                    <a href="#" class="social-icon-btn" id="socialYoutube" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom-bar">
+                <div class="copyright"><span>&copy; 2026 HANSYPIX.</span><span class="separator">|</span><span>Crafted with <i data-lucide="heart" class="heart-icon"></i> for photographers</span></div>
+                <div class="footer-legal-links"><a href="#">Privacy Policy</a><span class="dot">â€¢</span><a href="#">Terms of Service</a><span class="dot">â€¢</span><a href="#">Cookie Policy</a></div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav">
+        <a href="/src/pages/index.html" class="mobile-nav-item">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="/src/pages/portfolio.html" class="mobile-nav-item">
+            <i data-lucide="image"></i>
+            <span>Portfolio</span>
+        </a>
+        <a href="/src/pages/pricing.html" class="mobile-nav-item">
+            <i data-lucide="tag"></i>
+            <span>Pricing</span>
+        </a>
+        <a href="/src/pages/contact.html" class="mobile-nav-item active">
+            <i data-lucide="message-circle"></i>
+            <span>Contact</span>
+        </a>
+        <a href="#" class="mobile-nav-item" id="mobileAccountBtn">
+            <i data-lucide="user"></i>
+            <span id="mobileAccountLabel">Account</span>
+        </a>
+    </nav>
+
+    <!-- Mobile Account Menu (Hidden by default) -->
+    <div class="mobile-account-menu" id="mobileAccountMenu" style="display: none;">
+        <div class="account-menu-content glass-card">
+            <a href="/src/pages/admin/dashboard.html" class="account-menu-item" id="mobileAdminLink" style="display: none;">
+                <i data-lucide="shield"></i>
+                <span>Admin Panel</span>
+            </a>
+            <a href="/src/pages/my-bookings.html" class="account-menu-item">
+                <i data-lucide="calendar"></i>
+                <span>My Bookings</span>
+            </a>
+            <hr class="menu-divider">
+            <a href="#" class="account-menu-item logout-link" id="mobileLogoutBtn">
+                <i data-lucide="log-out"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Chat Widget -->
+    <div class="chat-widget" id="chatWidget" style="display: none;">
+        <button class="chat-toggle" id="chatToggle">
+            <i data-lucide="message-circle"></i>
+            <span class="chat-badge" id="chatBadge" style="display: none;">0</span>
+        </button>
+        <div class="chat-window" id="chatWindow" style="display: none;">
+            <div class="chat-header">
+                <h4>Chat with us</h4>
+                <button class="chat-close" id="chatClose">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input">
+                <input type="text" id="chatMessageInput" placeholder="Type a message...">
+                <button id="chatSendBtn">
+                    <i data-lucide="send"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Success Modal -->
+    <div class="modal" id="successModal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content glass-card">
+            <div class="modal-icon success">
+                <i data-lucide="check-circle"></i>
+            </div>
+            <h3 class="modal-title">Message Sent!</h3>
+            <p class="modal-text">Thank you for contacting us. We'll get back to you within 24 hours.</p>
+            <button class="btn-primary" id="closeModalBtn">Close</button>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <!-- Supabase CDN - Must load first -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="../supabase/config.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/translations.js?v=20260308-5"></script>
+    <script src="../js/navigation.js?v=6"></script>
+    <script src="../js/mobile-nav.js?v=8"></script>
+    <script src="../js/contact.js?v=6"></script>
+    <script src="../js/chat.js"></script>
+    
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

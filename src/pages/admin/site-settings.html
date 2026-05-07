@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Settings - HANSYPIX Admin</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+</head>
+<body class="admin-body">
+    <!-- Admin Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="admin-logo">
+                <img src="../../logo.png" alt="HANSYPIX Logo" class="logo-image">
+                <span>HANSYPIX</span>
+            </a>
+            <span class="admin-badge">Admin</span>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="portfolio-manager.html" class="nav-item">
+                <i data-lucide="image"></i>
+                <span>Portfolio</span>
+            </a>
+            <a href="site-settings.html" class="nav-item active">
+                <i data-lucide="settings"></i>
+                <span>Site Settings</span>
+            </a>
+            <a href="users.html" class="nav-item">
+                <i data-lucide="users"></i>
+                <span>Users</span>
+            </a>
+            <a href="messages.html" class="nav-item">
+                <i data-lucide="message-circle"></i>
+                <span>Messages</span>
+                <span class="badge" id="unreadMessagesBadge">0</span>
+            </a>
+            <a href="bookings.html" class="nav-item">
+                <i data-lucide="calendar"></i>
+                <span>Bookings</span>
+            </a>
+            <a href="payments.html" class="nav-item">
+                <i data-lucide="credit-card"></i>
+                <span>Payments</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="../index.html" class="nav-item">
+                <i data-lucide="arrow-left"></i>
+                <span>Back to Site</span>
+            </a>
+            <button class="nav-item" id="adminLogout">
+                <i data-lucide="log-out"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="admin-main">
+        <!-- Top Bar -->
+        <header class="admin-header">
+            <button class="mobile-sidebar-toggle" id="mobileSidebarToggle">
+                <i data-lucide="menu"></i>
+            </button>
+            
+            <h1 class="page-title">Site Settings</h1>
+            
+            <div class="header-actions">
+                <button class="btn-primary" id="saveAllSettings">
+                    <i data-lucide="save"></i>
+                    Save All Changes
+                </button>
+            </div>
+        </header>
+        
+        <!-- Settings Content -->
+        <div class="admin-content">
+            <!-- Settings Tabs -->
+            <div class="settings-tabs">
+                <button class="tab-btn active" data-tab="homepage">
+                    <i data-lucide="home"></i>
+                    Homepage
+                </button>
+                <button class="tab-btn" data-tab="pricing">
+                    <i data-lucide="tag"></i>
+                    Pricing
+                </button>
+                <button class="tab-btn" data-tab="contact">
+                    <i data-lucide="mail"></i>
+                    Contact Info
+                </button>
+                <button class="tab-btn" data-tab="social">
+                    <i data-lucide="share-2"></i>
+                    Social Media
+                </button>
+            </div>
+            
+            <!-- Homepage Settings -->
+            <div class="settings-panel active" id="homepage-panel">
+                <div class="settings-card glass-card">
+                    <h3 class="card-title">
+                        <i data-lucide="type"></i>
+                        Hero Section
+                    </h3>
+                    
+                    <form id="heroSettingsForm">
+                        <div class="form-group">
+                            <label for="heroTitle">Hero Title</label>
+                            <input type="text" id="heroTitle" placeholder="Capturing Moments, Creating Memories">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="heroSubtitle">Hero Subtitle</label>
+                            <input type="text" id="heroSubtitle" placeholder="Professional photography services for every occasion">
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">
+                            <i data-lucide="save"></i>
+                            Save Hero Settings
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="settings-card glass-card">
+                    <h3 class="card-title">
+                        <i data-lucide="align-left"></i>
+                        About Section
+                    </h3>
+                    
+                    <form id="aboutSettingsForm">
+                        <div class="form-group">
+                            <label for="aboutText">About Text</label>
+                            <textarea id="aboutText" rows="6" placeholder="Tell your story..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">
+                            <i data-lucide="save"></i>
+                            Save About Settings
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Pricing Settings -->
+            <div class="settings-panel" id="pricing-panel">
+                <div class="settings-card glass-card">
+                    <h3 class="card-title">
+                        <i data-lucide="tag"></i>
+                        Pricing Packages
+                    </h3>
+                    <p class="card-description">Edit your pricing packages. Changes will be reflected on the pricing page.</p>
+                    
+                    <div class="pricing-packages" id="pricingPackages">
+                        <!-- Pricing packages will be loaded here -->
+                    </div>
+                    
+                    <button class="btn-secondary" id="addPackageBtn">
+                        <i data-lucide="plus"></i>
+                        Add New Package
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Contact Settings -->
+            <div class="settings-panel" id="contact-panel">
+                <div class="settings-card glass-card">
+                    <h3 class="card-title">
+                        <i data-lucide="mail"></i>
+                        Contact Information
+                    </h3>
+                    
+                    <form id="contactSettingsForm">
+                        <div class="form-group">
+                            <label for="contactEmail">
+                                <i data-lucide="mail"></i>
+                                Email Address
+                            </label>
+                            <input type="email" id="contactEmail" placeholder="contact@hansypix.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactPhone">
+                                <i data-lucide="phone"></i>
+                                Phone Number
+                            </label>
+                            <input type="tel" id="contactPhone" placeholder="+1 (555) 123-4567">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactAddress">
+                                <i data-lucide="map-pin"></i>
+                                Address
+                            </label>
+                            <textarea id="contactAddress" rows="3" placeholder="123 Photography Lane..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">
+                            <i data-lucide="save"></i>
+                            Save Contact Info
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Social Media Settings -->
+            <div class="settings-panel" id="social-panel">
+                <div class="settings-card glass-card">
+                    <h3 class="card-title">
+                        <i data-lucide="share-2"></i>
+                        Social Media Links
+                    </h3>
+                    
+                    <form id="socialSettingsForm">
+                        <div class="form-group">
+                            <label for="socialInstagram">
+                                <i data-lucide="instagram"></i>
+                                Instagram URL
+                            </label>
+                            <input type="url" id="socialInstagram" placeholder="https://instagram.com/hansypix">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="socialFacebook">
+                                <i data-lucide="facebook"></i>
+                                Facebook URL
+                            </label>
+                            <input type="url" id="socialFacebook" placeholder="https://facebook.com/hansypix">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="socialTwitter">
+                                <i data-lucide="twitter"></i>
+                                Twitter URL
+                            </label>
+                            <input type="url" id="socialTwitter" placeholder="https://twitter.com/hansypix">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="socialYoutube">
+                                <i data-lucide="youtube"></i>
+                                YouTube URL
+                            </label>
+                            <input type="url" id="socialYoutube" placeholder="https://youtube.com/hansypix">
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">
+                            <i data-lucide="save"></i>
+                            Save Social Links
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Edit Package Modal -->
+    <div class="modal" id="editPackageModal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Package</h3>
+                <button class="modal-close" id="closePackageModal">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <form id="editPackageForm">
+                <input type="hidden" id="packageId">
+                
+                <div class="form-group">
+                    <label for="packageName">Package Name</label>
+                    <input type="text" id="packageName" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="packagePrice">Price ($)</label>
+                        <input type="number" id="packagePrice" min="0" step="0.01" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="packageDuration">Duration</label>
+                        <input type="text" id="packageDuration" placeholder="2 hours">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Features</label>
+                    <div id="packageFeatures">
+                        <!-- Features will be added dynamically -->
+                    </div>
+                    <button type="button" class="btn-secondary btn-small" id="addFeatureBtn">
+                        <i data-lucide="plus"></i>
+                        Add Feature
+                    </button>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="packagePopular">
+                        <span>Mark as popular</span>
+                    </label>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancelPackageEdit">Cancel</button>
+                    <button type="submit" class="btn-primary">
+                        <i data-lucide="save"></i>
+                        Save Package
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <!-- Supabase CDN - Must load first -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="../../supabase/config.js"></script>
+    <script src="../../js/config.js"></script>
+    <script src="../../js/admin/auth-check.js?v=2"></script>
+    <script src="../../js/admin/site-settings.js"></script>
+    
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

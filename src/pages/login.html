@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login to your HANSYPIX account to manage bookings and access exclusive features.">
+    <title>Login - HANSYPIX Professional Photography</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="../css/mobile.css?v=7">
+    <link rel="stylesheet" href="../css/translations.css?v=20260308-5">
+</head>
+<body class="auth-page">
+    <!-- Background Video -->
+    <div class="auth-background">
+        <video class="auth-video" autoplay muted loop playsinline>
+            <source src="/public/videos/hero-video.mp4" type="video/mp4">
+        </video>
+        <div class="auth-overlay"></div>
+    </div>
+    
+    <!-- Auth Container -->
+    <div class="auth-container">
+        <!-- Logo -->
+        <a href="/src/pages/index.html" class="auth-logo">
+            <i data-lucide="camera"></i>
+            <span>HANSYPIX</span>
+        </a>
+        
+        <!-- Login Form -->
+        <div class="auth-card glass-card">
+            <div class="auth-header">
+                <h1 class="auth-title">Welcome Back</h1>
+                <p class="auth-subtitle">Login to access your account</p>
+            </div>
+            
+            <form id="loginForm" class="auth-form" action="javascript:void(0)">
+                <div class="form-group">
+                    <label for="email">
+                        <i data-lucide="mail"></i>
+                        Email Address
+                    </label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com" autocomplete="email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">
+                        <i data-lucide="lock"></i>
+                        Password
+                    </label>
+                    <div class="password-input">
+                        <input type="password" id="password" name="password" required placeholder="Enter your password" autocomplete="current-password">
+                        <button type="button" class="password-toggle" id="togglePassword">
+                            <i data-lucide="eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="rememberMe" name="rememberMe">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-password" id="forgotPasswordLink">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="btn-primary btn-large btn-full" id="loginBtn">
+                    <i data-lucide="log-in"></i>
+                    Login
+                </button>
+                
+                <div class="form-divider">
+                    <span>or continue with</span>
+                </div>
+                
+                <div class="social-auth">
+                    <button type="button" class="social-auth-btn" id="googleAuthBtn">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M19.8055 10.2292C19.8055 9.55056 19.7501 8.86667 19.6306 8.19861H10.2V12.0492H15.6014C15.3773 13.2911 14.6571 14.3898 13.6025 15.0875V17.5866H16.8251C18.7174 15.8449 19.8055 13.2728 19.8055 10.2292Z" fill="#4285F4"/>
+                            <path d="M10.2 20C12.9571 20 15.2681 19.1044 16.8293 17.5866L13.6067 15.0875C12.7079 15.6972 11.5571 16.0428 10.2042 16.0428C7.54165 16.0428 5.29375 14.2828 4.50208 11.9167H1.17708V14.4922C2.77083 17.6589 6.30833 20 10.2 20Z" fill="#34A853"/>
+                            <path d="M4.49792 11.9167C4.07917 10.6747 4.07917 9.33 4.49792 8.08806V5.5125H1.17708C-0.195833 8.24028 -0.195833 11.7653 1.17708 14.4931L4.49792 11.9167Z" fill="#FBBC04"/>
+                            <path d="M10.2 3.95722C11.6278 3.93472 13.0042 4.47222 14.0375 5.45722L16.8903 2.60417C15.1806 0.990278 12.9306 0.0819444 10.2 0.104444C6.30833 0.104444 2.77083 2.44556 1.17708 5.6125L4.49792 8.18806C5.28542 5.81778 7.53333 3.95722 10.2 3.95722Z" fill="#EA4335"/>
+                        </svg>
+                        Google
+                    </button>
+                </div>
+            </form>
+            
+            <div class="auth-footer">
+                <p>Don't have an account? <a href="/src/pages/register.html">Sign up</a></p>
+            </div>
+        </div>
+        
+        <!-- Back to Home -->
+        <a href="/src/pages/index.html" class="back-to-home">
+            <i data-lucide="arrow-left"></i>
+            Back to Home
+        </a>
+    </div>
+    
+    <!-- Forgot Password Modal -->
+    <div class="modal" id="forgotPasswordModal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content glass-card">
+            <button class="modal-close" id="closeModalBtn">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="modal-icon">
+                <i data-lucide="key"></i>
+            </div>
+            <h3 class="modal-title">Reset Password</h3>
+            <p class="modal-text">Enter your email address and we'll send you a link to reset your password.</p>
+            
+            <form id="forgotPasswordForm" action="javascript:void(0)">
+                <div class="form-group">
+                    <label for="resetEmail">
+                        <i data-lucide="mail"></i>
+                        Email Address
+                    </label>
+                    <input type="email" id="resetEmail" required placeholder="your@email.com">
+                </div>
+                <button type="submit" class="btn-primary btn-full">
+                    Send Reset Link
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <!-- Supabase CDN - Must load first -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="../supabase/config.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/translations.js?v=20260308-5"></script>
+    <script src="../js/auth/login.js"></script>
+    
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

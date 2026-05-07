@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - HANSYPIX</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Chart.js for Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+</head>
+<body class="admin-body">
+    <!-- Admin Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="admin-logo">
+                <img src="../../logo.png" alt="HANSYPIX Logo" class="logo-image">
+                <span>HANSYPIX</span>
+            </a>
+            <span class="admin-badge">Admin</span>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item active">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="portfolio-manager.html" class="nav-item">
+                <i data-lucide="image"></i>
+                <span>Portfolio</span>
+            </a>
+            <a href="site-settings.html" class="nav-item">
+                <i data-lucide="settings"></i>
+                <span>Site Settings</span>
+            </a>
+            <a href="users.html" class="nav-item">
+                <i data-lucide="users"></i>
+                <span>Users</span>
+            </a>
+            <a href="messages.html" class="nav-item">
+                <i data-lucide="message-circle"></i>
+                <span>Messages</span>
+                <span class="badge" id="unreadMessagesBadge">0</span>
+            </a>
+            <a href="bookings.html" class="nav-item">
+                <i data-lucide="calendar"></i>
+                <span>Bookings</span>
+            </a>
+            <a href="payments.html" class="nav-item">
+                <i data-lucide="credit-card"></i>
+                <span>Payments</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="../index.html" class="nav-item">
+                <i data-lucide="arrow-left"></i>
+                <span>Back to Site</span>
+            </a>
+            <button class="nav-item" id="adminLogout">
+                <i data-lucide="log-out"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="admin-main">
+        <!-- Top Bar -->
+        <header class="admin-header">
+            <button class="mobile-sidebar-toggle" id="mobileSidebarToggle">
+                <i data-lucide="menu"></i>
+            </button>
+            
+            <h1 class="page-title">Dashboard</h1>
+            
+            <div class="admin-user">
+                <span class="admin-user-name" id="adminUserName">Admin</span>
+                <div class="admin-avatar">
+                    <i data-lucide="user"></i>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Dashboard Content -->
+        <div class="admin-content">
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card glass-card">
+                    <div class="stat-icon blue">
+                        <i data-lucide="image"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-value" id="totalPortfolioItems">0</h3>
+                        <p class="stat-label">Portfolio Items</p>
+                    </div>
+                    <div class="stat-trend positive">
+                        <i data-lucide="trending-up"></i>
+                        <span>+12%</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card glass-card">
+                    <div class="stat-icon green">
+                        <i data-lucide="calendar"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-value" id="totalBookings">0</h3>
+                        <p class="stat-label">Total Bookings</p>
+                    </div>
+                    <div class="stat-trend positive">
+                        <i data-lucide="trending-up"></i>
+                        <span>+8%</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card glass-card">
+                    <div class="stat-icon purple">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-value" id="totalUsers">0</h3>
+                        <p class="stat-label">Registered Users</p>
+                    </div>
+                    <div class="stat-trend positive">
+                        <i data-lucide="trending-up"></i>
+                        <span>+15%</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card glass-card">
+                    <div class="stat-icon orange">
+                        <i data-lucide="dollar-sign"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-value" id="totalRevenue">$0</h3>
+                        <p class="stat-label">Total Revenue</p>
+                    </div>
+                    <div class="stat-trend positive">
+                        <i data-lucide="trending-up"></i>
+                        <span>+22%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Charts Row -->
+            <div class="charts-grid">
+                <div class="chart-card glass-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Bookings Overview</h3>
+                        <select class="chart-period" id="bookingsChartPeriod">
+                            <option value="week">Last 7 Days</option>
+                            <option value="month" selected>Last 30 Days</option>
+                            <option value="year">Last Year</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="bookingsChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-card glass-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Revenue Analytics</h3>
+                        <select class="chart-period" id="revenueChartPeriod">
+                            <option value="week">Last 7 Days</option>
+                            <option value="month" selected>Last 30 Days</option>
+                            <option value="year">Last Year</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="activity-grid">
+                <div class="activity-card glass-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i data-lucide="calendar"></i>
+                            Recent Bookings
+                        </h3>
+                        <a href="bookings.html" class="view-all">View All</a>
+                    </div>
+                    <div class="activity-list" id="recentBookings">
+                        <!-- Recent bookings will be loaded here -->
+                        <div class="loading-state">
+                            <div class="spinner"></div>
+                            <p>Loading bookings...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity-card glass-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i data-lucide="message-circle"></i>
+                            Recent Messages
+                        </h3>
+                        <a href="messages.html" class="view-all">View All</a>
+                    </div>
+                    <div class="activity-list" id="recentMessages">
+                        <!-- Recent messages will be loaded here -->
+                        <div class="loading-state">
+                            <div class="spinner"></div>
+                            <p>Loading messages...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="quick-actions-section">
+                <h3 class="section-title">Quick Actions</h3>
+                <div class="quick-actions-grid">
+                    <a href="portfolio-manager.html?action=upload" class="quick-action-card glass-card">
+                        <div class="action-icon">
+                            <i data-lucide="upload"></i>
+                        </div>
+                        <h4>Upload Media</h4>
+                        <p>Add new photos or videos</p>
+                    </a>
+                    
+                    <a href="site-settings.html" class="quick-action-card glass-card">
+                        <div class="action-icon">
+                            <i data-lucide="edit"></i>
+                        </div>
+                        <h4>Edit Homepage</h4>
+                        <p>Update site content</p>
+                    </a>
+                    
+                    <a href="messages.html" class="quick-action-card glass-card">
+                        <div class="action-icon">
+                            <i data-lucide="mail"></i>
+                        </div>
+                        <h4>View Messages</h4>
+                        <p>Respond to customers</p>
+                    </a>
+                    
+                    <a href="bookings.html" class="quick-action-card glass-card">
+                        <div class="action-icon">
+                            <i data-lucide="check-circle"></i>
+                        </div>
+                        <h4>Manage Bookings</h4>
+                        <p>Confirm or update</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Scripts -->
+    <!-- Supabase CDN - Must load first -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="../../supabase/config.js"></script>
+    <script src="../../js/config.js"></script>
+    <script src="../../js/admin/auth-check.js?v=2"></script>
+    <script src="../../js/admin/dashboard.js"></script>
+    
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

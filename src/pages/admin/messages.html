@@ -1,0 +1,262 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - HANSYPIX Admin</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+</head>
+<body class="admin-body">
+    <!-- Admin Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="admin-logo">
+                <img src="../../logo.png" alt="HANSYPIX Logo" class="logo-image">
+                <span>HANSYPIX</span>
+            </a>
+            <span class="admin-badge">Admin</span>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="portfolio-manager.html" class="nav-item">
+                <i data-lucide="image"></i>
+                <span>Portfolio</span>
+            </a>
+            <a href="site-settings.html" class="nav-item">
+                <i data-lucide="settings"></i>
+                <span>Site Settings</span>
+            </a>
+            <a href="users.html" class="nav-item">
+                <i data-lucide="users"></i>
+                <span>Users</span>
+            </a>
+            <a href="messages.html" class="nav-item active">
+                <i data-lucide="message-circle"></i>
+                <span>Messages</span>
+                <span class="badge" id="unreadMessagesBadge">0</span>
+            </a>
+            <a href="bookings.html" class="nav-item">
+                <i data-lucide="calendar"></i>
+                <span>Bookings</span>
+            </a>
+            <a href="payments.html" class="nav-item">
+                <i data-lucide="credit-card"></i>
+                <span>Payments</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="../index.html" class="nav-item">
+                <i data-lucide="arrow-left"></i>
+                <span>Back to Site</span>
+            </a>
+            <button class="nav-item" id="adminLogout">
+                <i data-lucide="log-out"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="admin-main">
+        <!-- Top Bar -->
+        <header class="admin-header">
+            <button class="mobile-sidebar-toggle" id="mobileSidebarToggle">
+                <i data-lucide="menu"></i>
+            </button>
+            
+            <h1 class="page-title">Messages</h1>
+            
+            <div class="header-actions">
+                <div class="search-box">
+                    <i data-lucide="search"></i>
+                    <input type="text" id="messageSearch" placeholder="Search messages...">
+                </div>
+            </div>
+        </header>
+        
+        <!-- Messages Content -->
+        <div class="admin-content">
+            <div class="messages-layout">
+                <!-- Conversations List -->
+                <div class="conversations-panel glass-card">
+                    <div class="panel-header">
+                        <h3>Conversations</h3>
+                        <div class="filter-tabs">
+                            <button class="filter-tab active" data-filter="all">All</button>
+                            <button class="filter-tab" data-filter="unread">Unread</button>
+                        </div>
+                    </div>
+                    
+                    <div class="conversations-list" id="conversationsList">
+                        <!-- Conversations will be loaded here -->
+                        <div class="loading-state">
+                            <div class="spinner"></div>
+                            <p>Loading conversations...</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Empty State -->
+                    <div class="empty-state" id="conversationsEmpty" style="display: none;">
+                        <i data-lucide="message-circle"></i>
+                        <h4>No conversations</h4>
+                        <p>Messages will appear here</p>
+                    </div>
+                </div>
+                
+                <!-- Chat Panel -->
+                <div class="chat-panel glass-card">
+                    <!-- No Conversation Selected -->
+                    <div class="no-conversation" id="noConversation">
+                        <i data-lucide="message-square"></i>
+                        <h3>Select a conversation</h3>
+                        <p>Choose a conversation from the list to view messages</p>
+                    </div>
+                    
+                    <!-- Active Conversation -->
+                    <div class="active-conversation" id="activeConversation" style="display: none;">
+                        <!-- Chat Header -->
+                        <div class="chat-header">
+                            <div class="chat-user-info">
+                                <div class="chat-avatar">
+                                    <i data-lucide="user"></i>
+                                </div>
+                                <div class="chat-user-details">
+                                    <h4 id="chatUserName">-</h4>
+                                    <p id="chatUserEmail">-</p>
+                                </div>
+                            </div>
+                            <div class="chat-actions">
+                                <button class="icon-btn" id="viewUserProfile" title="View Profile">
+                                    <i data-lucide="user"></i>
+                                </button>
+                                <button class="icon-btn" id="markAsRead" title="Mark as Read">
+                                    <i data-lucide="check-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Messages Area -->
+                        <div class="messages-area" id="messagesArea">
+                            <!-- Messages will be loaded here -->
+                        </div>
+                        
+                        <!-- Message Input -->
+                        <div class="message-input-area">
+                            <form id="replyForm">
+                                <input type="hidden" id="activeUserId">
+                                <div class="message-input-wrapper">
+                                    <textarea id="messageInput" placeholder="Type your reply..." rows="1"></textarea>
+                                    <button type="submit" class="send-btn">
+                                        <i data-lucide="send"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form Submissions -->
+                <div class="submissions-panel glass-card">
+                    <div class="panel-header">
+                        <h3>
+                            <i data-lucide="mail"></i>
+                            Contact Form
+                        </h3>
+                    </div>
+                    
+                    <div class="submissions-list" id="submissionsList">
+                        <!-- Contact submissions will be loaded here -->
+                        <div class="loading-state">
+                            <div class="spinner"></div>
+                            <p>Loading submissions...</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Empty State -->
+                    <div class="empty-state" id="submissionsEmpty" style="display: none;">
+                        <i data-lucide="mail"></i>
+                        <h4>No submissions</h4>
+                        <p>Contact form submissions will appear here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Contact Submission Modal -->
+    <div class="modal" id="submissionModal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h3 class="modal-title">Contact Submission</h3>
+                <button class="modal-close" id="closeSubmissionModal">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <div class="submission-details">
+                <div class="detail-row">
+                    <label>Name:</label>
+                    <span id="submissionName">-</span>
+                </div>
+                <div class="detail-row">
+                    <label>Email:</label>
+                    <span id="submissionEmail">-</span>
+                </div>
+                <div class="detail-row">
+                    <label>Phone:</label>
+                    <span id="submissionPhone">-</span>
+                </div>
+                <div class="detail-row">
+                    <label>Subject:</label>
+                    <span id="submissionSubject">-</span>
+                </div>
+                <div class="detail-row">
+                    <label>Date:</label>
+                    <span id="submissionDate">-</span>
+                </div>
+                <div class="detail-row full">
+                    <label>Message:</label>
+                    <p id="submissionMessage">-</p>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn-secondary" id="closeSubmissionBtn">Close</button>
+                <a href="#" class="btn-primary" id="replyToSubmission">
+                    <i data-lucide="reply"></i>
+                    Reply via Email
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <!-- Supabase CDN - Must load first -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="../../supabase/config.js"></script>
+    <script src="../../js/config.js"></script>
+    <script src="../../js/admin/auth-check.js?v=2"></script>
+    <script src="../../js/admin/messages.js"></script>
+    
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

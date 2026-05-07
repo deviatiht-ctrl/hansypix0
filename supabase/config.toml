@@ -1,0 +1,17 @@
+<<<<<<< HEAD
+# Supabase Edge Functions Configuration
+
+[functions.create-payment-intent]
+verify_jwt = true
+
+[functions.stripe-webhook]
+verify_jwt = false
+=======
+# Supabase Edge Functions Configuration
+
+[functions.create-payment-intent]
+verify_jwt = true
+
+[functions.stripe-webhook]
+verify_jwt = false
+>>>>>>> a0f94cd2f455cd5b65045c161fc96ba4dddb1da9

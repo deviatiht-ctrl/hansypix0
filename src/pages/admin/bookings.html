@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookings - HANSYPIX Admin</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+</head>
+<body class="admin-body">
+    <!-- Admin Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="admin-logo">
+                <img src="../../logo.png" alt="HANSYPIX Logo" class="logo-image">
+                <span>HANSYPIX</span>
+            </a>
+            <span class="admin-badge">Admin</span>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="portfolio-manager.html" class="nav-item">
+                <i data-lucide="image"></i>
+                <span>Portfolio</span>
+            </a>
+            <a href="site-settings.html" class="nav-item">
+                <i data-lucide="settings"></i>
+                <span>Site Settings</span>
+            </a>
+            <a href="users.html" class="nav-item">
+                <i data-lucide="users"></i>
+                <span>Users</span>
+            </a>
+            <a href="messages.html" class="nav-item">
+                <i data-lucide="message-circle"></i>
+                <span>Messages</span>
+                <span class="badge" id="unreadMessagesBadge">0</span>
+            </a>
+            <a href="bookings.html" class="nav-item active">
+                <i data-lucide="calendar"></i>
+                <span>Bookings</span>
+            </a>
+            <a href="payments.html" class="nav-item">
+                <i data-lucide="credit-card"></i>
+                <span>Payments</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="../index.html" class="nav-item">
+                <i data-lucide="arrow-left"></i>
+                <span>Back to Site</span>
+            </a>
+            <button class="nav-item" id="adminLogout">
+                <i data-lucide="log-out"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="admin-main">
+        <!-- Top Bar -->
+        <header class="admin-header">
+            <button class="mobile-sidebar-toggle" id="mobileSidebarToggle">
+                <i data-lucide="menu"></i>
+            </button>
+            
+            <h1 class="page-title">Bookings</h1>
+            
+            <div class="header-actions">
+                <div class="search-box">
+                    <i data-lucide="search"></i>
+                    <input type="text" id="bookingSearch" placeholder="Search bookings...">
+                </div>
+            </div>
+        </header>
+        
+        <!-- Bookings Content -->
+        <div class="admin-content">
+            <!-- Stats -->
+            <div class="stats-row">
+                <div class="stat-card glass-card">
+                    <div class="stat-icon blue">
+                        <i data-lucide="calendar"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-value" id="totalBookings">0</h3>
+                        <p class="stat-label">Total Bookings</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card glass-card">
+                    <div class="stat-icon orange">
+                        <i data-lucide="clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-value" id="pendingBookings">0</h3>
+                        <p class="stat-label">Pending</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card glass-card">
+                    <div class="stat-icon green">
+                        <i data-lucide="check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-value" id="confirmedBookings">0</h3>
+                        <p class="stat-label">Confirmed</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Filters -->
+            <div class="content-filters glass-card">
+                <div class="filter-group">
+                    <label>Status</label>
+                    <select id="statusFilter">
+                        <option value="all">All Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Sort By</label>
+                    <select id="sortFilter">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="date">By Date</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Bookings Table -->
+            <div class="data-table glass-card">
+                <table id="bookingsTable">
+                    <thead>
+                        <tr>
+                            <th>Customer</th>
+                            <th>Package</th>
+                            <th>Date & Time</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookingsTableBody">
+                        <tr class="loading-row">
+                            <td colspan="6">
+                                <div class="loading-state">
+                                    <div class="spinner"></div>
+                                    <p>Loading bookings...</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <i data-lucide="calendar-off"></i>
+                <h3>No bookings found</h3>
+                <p>Try adjusting your search or filters</p>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Booking Details Modal -->
+    <div class="modal" id="bookingModal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content glass-card" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3>Booking Details</h3>
+                <button class="modal-close" id="closeBookingModal">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="bookingDetailsContent">
+                <!-- Content loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Email Modal -->
+    <div class="modal" id="emailModal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content glass-card" style="max-width: 700px;">
+            <div class="modal-header">
+                <h3><i data-lucide="mail"></i> Voye Email bay Kliyan</h3>
+                <button class="modal-close" id="closeEmailModal">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Email Type Selection -->
+                <div class="email-type-selector">
+                    <label>Tip Mesaj:</label>
+                    <div class="email-type-buttons">
+                        <button class="email-type-btn active" data-type="confirmation">
+                            <i data-lucide="check-circle"></i>
+                            Konfimasyon
+                        </button>
+                        <button class="email-type-btn" data-type="pending">
+                            <i data-lucide="clock"></i>
+                            An Atant
+                        </button>
+                        <button class="email-type-btn" data-type="cancellation">
+                            <i data-lucide="x-circle"></i>
+                            Anilasyon
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Email Preview -->
+                <div class="email-preview-container">
+                    <label>ApÃ¨si Email:</label>
+                    <div class="email-preview" id="emailPreview">
+                        <!-- Email content loaded dynamically -->
+                    </div>
+                </div>
+
+                <!-- Email Subject -->
+                <div class="form-group">
+                    <label for="emailSubject">SijÃ¨:</label>
+                    <input type="text" id="emailSubject" class="form-control" readonly>
+                </div>
+
+                <!-- Recipient Info -->
+                <div class="email-recipient-info">
+                    <div class="recipient-item">
+                        <span class="recipient-label">Pou:</span>
+                        <span class="recipient-value" id="emailRecipient">-</span>
+                    </div>
+                    <div class="recipient-item">
+                        <span class="recipient-label">De:</span>
+                        <span class="recipient-value">HANSYPIX Photography</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="email-actions">
+                    <button class="btn-secondary" id="copyEmailBtn">
+                        <i data-lucide="copy"></i>
+                        Kopye Mesaj
+                    </button>
+                    <button class="btn-primary" id="openMailClientBtn">
+                        <i data-lucide="send"></i>
+                        Ouvri Email Client
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Supabase CDN - Must load first -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="../../supabase/config.js"></script>
+    <script src="../../js/config.js"></script>
+    <script src="../../js/admin/auth-check.js?v=2"></script>
+    <script src="../../js/admin/bookings.js?v=2000"></script>
+    
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

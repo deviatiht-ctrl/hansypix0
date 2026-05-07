@@ -1,0 +1,49 @@
+[build]
+  publish = "."
+  command = "echo 'No build command needed'"
+
+[[redirects]]
+  from = "/"
+  to = "/src/pages/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/portfolio"
+  to = "/src/pages/portfolio.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/src/pages/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/pricing"
+  to = "/src/pages/pricing.html"
+  status = 200
+
+[[redirects]]
+  from = "/checkout"
+  to = "/src/pages/checkout.html"
+  status = 200
+
+[[redirects]]
+  from = "/login"
+  to = "/src/pages/login.html"
+  status = 200
+
+[[redirects]]
+  from = "/register"
+  to = "/src/pages/register.html"
+  status = 200
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Service-Worker-Allowed = "/"
+
+[[headers]]
+  for = "/manifest.json"
+  [headers.values]
+    Content-Type = "application/manifest+json"

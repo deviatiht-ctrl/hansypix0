@@ -1,0 +1,56 @@
+{
+  "id": "hansypix-pwa-v1",
+  "name": "HANSYPIX",
+  "short_name": "HANSYPIX",
+  "description": "Professional Photography and Videography Services",
+  "start_url": "/src/pages/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/src/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/src/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/src/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/src/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["photography", "business", "entertainment"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Portfolio",
+      "short_name": "Portfolio",
+      "description": "View our portfolio",
+      "url": "/src/pages/portfolio.html",
+      "icons": [{ "src": "/src/logo.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Contact",
+      "short_name": "Contact",
+      "description": "Contact us",
+      "url": "/src/pages/contact.html",
+      "icons": [{ "src": "/src/logo.png", "sizes": "192x192" }]
+    }
+  ]
+}
