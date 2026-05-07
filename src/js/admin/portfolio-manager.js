@@ -333,11 +333,6 @@
         const tags = getValue('uploadTags').split(',').map(t => t.trim()).filter(t => t);
         const isFeatured = document.getElementById('uploadFeatured')?.checked || false;
 
-        if (!baseTitle && selectedFiles.length === 1) {
-            safeShowToast('Title is required', 'warning');
-            return;
-        }
-
         if (!category) {
             safeShowToast('Category is required', 'warning');
             return;
