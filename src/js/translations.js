@@ -30,7 +30,7 @@
             
             "services.outdoor_title": "Artistic Project",
             "services.outdoor_description": "artistc,editorial,fashion,or portfolio concepts",
-            "services.outdoor_link": "View Outdoor Work <i data-lucide='arrow-right'></i>",
+            "services.outdoor_link": "View Artistic Work <i data-lucide='arrow-right'></i>",
             
             "services.event_title": "Event Coverage",
             "services.event_description": "Complete event photography for weddings, corporate events, parties, and celebrations. Capturing every special moment.",
