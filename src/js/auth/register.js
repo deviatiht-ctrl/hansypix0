@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
     function safeShowToast(message, type = 'info') {
         try {
             if (typeof showToast === 'function') {
@@ -16,13 +16,13 @@
     function getRedirectTarget() {
         const params = new URLSearchParams(window.location.search);
         const raw = params.get('redirect');
-        if (!raw) return 'index.html';
+        if (!raw) return '/index.html';
 
         const target = raw.trim();
-        if (!target) return 'index.html';
+        if (!target) return '/index.html';
 
         if (/^https?:\/\//i.test(target) || target.startsWith('//') || /^javascript:/i.test(target)) {
-            return 'index.html';
+            return '/index.html';
         }
 
         return target;
