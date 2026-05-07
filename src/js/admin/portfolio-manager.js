@@ -1,7 +1,7 @@
-﻿(() => {
+(() => {
     let allItems = [];
     let filteredItems = [];
-    let selectedFile = null;
+    let selectedFiles = [];
     let currentEditId = null;
     let currentDeleteId = null;
 
@@ -226,7 +226,7 @@
         if (uploadDetails) uploadDetails.style.display = 'none';
         if (filePreview) filePreview.style.display = 'none';
 
-        selectedFile = null;
+        selectedFiles = [];
 
         const form = document.getElementById('uploadForm');
         if (form) form.reset();
@@ -234,27 +234,41 @@
         openModal(modal);
     }
 
-    function handleFileSelect(file) {
-        if (!file) return;
+    function handleFileSelect(files) {
+        if (!files || files.length === 0) return;
 
-        selectedFile = file;
+        selectedFiles = Array.from(files);
 
         const filePreview = document.getElementById('filePreview');
         const uploadDetails = document.getElementById('uploadDetails');
 
         if (filePreview) {
-            filePreview.innerHTML = `
-                <div class="file-preview-item">
-                    <i data-lucide="${file.type.startsWith('video/') ? 'video' : 'image'}"></i>
-                    <p>${file.name}</p>
-                    <small>${(file.size / 1024 / 1024).toFixed(2)} MB</small>
-                </div>
-            `;
+            let html = '';
+            selectedFiles.forEach(file => {
+                html += `
+                    <div class="file-preview-item" style="margin-bottom: 5px; display: flex; align-items: center; gap: 10px;">
+                        <i data-lucide="${file.type.startsWith('video/') ? 'video' : 'image'}" style="width: 20px; height: 20px;"></i>
+                        <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; margin: 0;">${file.name}</p>
+                        <small style="margin-left: auto;">${(file.size / 1024 / 1024).toFixed(2)} MB</small>
+                    </div>
+                `;
+            });
+            filePreview.innerHTML = html;
             filePreview.style.display = 'block';
+            filePreview.style.maxHeight = '200px';
+            filePreview.style.overflowY = 'auto';
+            filePreview.style.padding = '10px';
+            filePreview.style.background = 'rgba(255, 255, 255, 0.05)';
+            filePreview.style.borderRadius = '8px';
         }
 
         if (uploadDetails) {
             uploadDetails.style.display = 'block';
+            // Set default title to first file name if empty
+            const titleInput = document.getElementById('uploadTitle');
+            if (titleInput && !titleInput.value) {
+                titleInput.value = selectedFiles[0].name.split('.')[0];
+            }
         }
 
         if (typeof lucide !== 'undefined') {
@@ -303,8 +317,8 @@
     async function handleUploadSubmit(e) {
         e.preventDefault();
 
-        if (!selectedFile) {
-            safeShowToast('Please select a file', 'warning');
+        if (selectedFiles.length === 0) {
+            safeShowToast('Please select at least one file', 'warning');
             return;
         }
 
@@ -313,13 +327,13 @@
             return;
         }
 
-        const title = getValue('uploadTitle').trim();
+        const baseTitle = getValue('uploadTitle').trim();
         const description = getValue('uploadDescription').trim();
         const category = getValue('uploadCategory');
         const tags = getValue('uploadTags').split(',').map(t => t.trim()).filter(t => t);
         const isFeatured = document.getElementById('uploadFeatured')?.checked || false;
 
-        if (!title) {
+        if (!baseTitle && selectedFiles.length === 1) {
             safeShowToast('Title is required', 'warning');
             return;
         }
@@ -336,40 +350,64 @@
             if (progressDiv) progressDiv.style.display = 'block';
             if (submitBtn) submitBtn.disabled = true;
 
-            console.log('Starting upload process...');
-            const mediaPath = await uploadFile(selectedFile);
-            console.log('File uploaded to:', mediaPath);
+            let successCount = 0;
+            
+            for (let i = 0; i < selectedFiles.length; i++) {
+                const file = selectedFiles[i];
+                
+                const progressText = progressDiv.querySelector('p');
+                if (progressText) {
+                    progressText.textContent = `Uploading ${i + 1} of ${selectedFiles.length}...`;
+                }
 
-            const mediaType = selectedFile.type.startsWith('video/') ? 'video' : 'image';
+                console.log(`Uploading file ${i+1}/${selectedFiles.length}:`, file.name);
+                const mediaPath = await uploadFile(file);
+                
+                const mediaType = file.type.startsWith('video/') ? 'video' : 'image';
+                
+                let finalTitle = baseTitle;
+                if (!finalTitle) {
+                    finalTitle = file.name.split('.')[0];
+                } else if (selectedFiles.length > 1) {
+                    finalTitle = `${baseTitle} ${i + 1}`;
+                }
 
-            console.log('Inserting portfolio record...');
-            const { error } = await supabaseClient
-                .from('portfolio')
-                .insert({
-                    title,
-                    description,
-                    category,
-                    media_type: mediaType,
-                    media_url: mediaPath,
-                    tags,
-                    is_featured: isFeatured
-                });
+                console.log(`Inserting portfolio record for ${file.name}...`);
+                const { error } = await supabaseClient
+                    .from('portfolio')
+                    .insert({
+                        title: finalTitle,
+                        description,
+                        category,
+                        media_type: mediaType,
+                        media_url: mediaPath,
+                        tags,
+                        is_featured: isFeatured
+                    });
 
-            if (error) {
-                console.error('Database insert error:', error);
-                throw new Error(`Database error: ${error.message}`);
+                if (error) {
+                    console.error('Database insert error for file', file.name, ':', error);
+                    safeShowToast(`Failed to save ${file.name}`, 'error');
+                } else {
+                    successCount++;
+                }
             }
 
-            console.log('Portfolio item created successfully');
-            safeShowToast('Media uploaded successfully', 'success');
-            closeModal(document.getElementById('uploadModal'));
-            await loadPortfolio();
+            if (successCount > 0) {
+                safeShowToast(`Successfully uploaded ${successCount} item(s)`, 'success');
+                closeModal(document.getElementById('uploadModal'));
+                await loadPortfolio();
+            }
         } catch (err) {
             console.error('Upload error:', err);
             const errorMessage = err.message || 'Failed to upload media';
             safeShowToast(errorMessage, 'error');
         } finally {
-            if (progressDiv) progressDiv.style.display = 'none';
+            if (progressDiv) {
+                progressDiv.style.display = 'none';
+                const progressText = progressDiv.querySelector('p');
+                if (progressText) progressText.textContent = 'Uploading... Please wait.';
+            }
             if (submitBtn) submitBtn.disabled = false;
         }
     }
@@ -507,16 +545,12 @@
                 e.preventDefault();
                 uploadArea.style.borderColor = '';
                 const files = e.dataTransfer.files;
-                if (files.length > 0) {
-                    handleFileSelect(files[0]);
-                }
+                if (files.length > 0) { handleFileSelect(files); }
             });
 
             fileInput.addEventListener('change', (e) => {
                 const files = e.target.files;
-                if (files.length > 0) {
-                    handleFileSelect(files[0]);
-                }
+                if (files.length > 0) { handleFileSelect(files); }
             });
         }
     }
