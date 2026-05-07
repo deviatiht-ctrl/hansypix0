@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
     function safeShowToast(message, type = 'info') {
         try {
             if (typeof showToast === 'function') {
@@ -160,7 +160,7 @@
                 const origin = window.location.origin;
                 const options = {};
                 if (origin && origin !== 'null' && /^https?:/i.test(origin)) {
-                    options.redirectTo = `${origin}/src/pages/index.html`;
+                    options.redirectTo = `${origin}/index.html`;
                 }
 
                 const { data, error } = await supabaseClient.auth.signInWithOAuth({

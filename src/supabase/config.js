@@ -116,7 +116,7 @@ async function signOut() {
     try {
         const { error } = await supabaseClient.auth.signOut();
         if (error) throw error;
-        window.location.href = '/src/pages/index.html';
+        window.location.href = '/index.html';
     } catch (error) {
         console.error('Error signing out:', error);
     }

@@ -2,7 +2,7 @@ const CACHE_NAME = 'hansypix-v2026-03-08-5';
 
 const STATIC_ASSETS = [
   '/',
-  '/src/pages/index.html',
+  '/index.html',
   '/src/css/global.css?v=20260308',
   '/src/css/navigation.css?v=20260308',
   '/src/css/home.css?v=20260308',
@@ -72,7 +72,7 @@ self.addEventListener('fetch', (event) => {
         // Fallback for HTML
         const isHtmlNav = req.mode === 'navigate' || req.headers.get('accept')?.includes('text/html');
         if (isHtmlNav) {
-          return caches.match('/src/pages/index.html');
+          return caches.match('/index.html');
         }
         
         return new Response('Offline', { status: 503, statusText: 'Service Unavailable' });

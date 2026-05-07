@@ -1,9 +1,9 @@
-﻿let deferredPrompt;
+let deferredPrompt;
 let installButton;
 
 function isHomePage() {
     const path = window.location.pathname.toLowerCase();
-    return path === '/' || path.endsWith('/index.html') || path.endsWith('/src/pages/index.html');
+    return path === '/' || path.endsWith('/index.html') || path.endsWith('/index.html');
 }
 
 function detectDevice() {

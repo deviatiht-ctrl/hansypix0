@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
     function safeShowToast(message, type = 'info') {
         try {
             if (typeof showToast === 'function') {
@@ -25,7 +25,7 @@
     }
 
     function redirectToHome() {
-        window.location.href = '/src/pages/index.html';
+        window.location.href = '/index.html';
     }
 
     function initSidebar() {
