@@ -1,23 +1,28 @@
 -- =====================================================
--- UPDATE PORTFOLIO CATEGORIES (SAFE VERSION)
--- Run this in Supabase SQL Editor
+-- UPDATE PORTFOLIO CATEGORIES (BULLDOZER VERSION)
+-- Use this if you are getting "violated by some row" errors
 -- =====================================================
 
--- 1. First, drop the existing constraint so we can modify the data
+-- 1. Drop any existing constraint first
 ALTER TABLE portfolio DROP CONSTRAINT IF EXISTS portfolio_category_check;
 
--- 2. Update existing data to match the new naming convention
--- This ensures no row violates the new constraint
-UPDATE portfolio SET category = 'Personal portrait session' WHERE category = 'studio';
-UPDATE portfolio SET category = 'Business headshot' WHERE category = 'business' OR category = 'corporate';
-UPDATE portfolio SET category = 'artistic' WHERE category = 'outdoor' OR category = 'creative';
-UPDATE portfolio SET category = 'Event Coverage' WHERE category = 'events';
--- 'video' stays 'video' or we can change it too
--- UPDATE portfolio SET category = 'Video Production' WHERE category = 'video';
+-- 2. Force all existing data to match one of the 5 new categories
+-- This uses a CASE statement to rename everything correctly
+UPDATE portfolio 
+SET category = CASE 
+    WHEN category = 'studio' THEN 'Personal portrait session'
+    WHEN category = 'business' OR category = 'corporate' THEN 'Business headshot'
+    WHEN category = 'outdoor' OR category = 'creative' THEN 'artistic'
+    WHEN category = 'events' THEN 'Event Coverage'
+    -- If it's already one of the new ones, keep it
+    WHEN category IN ('Personal portrait session', 'Business headshot', 'artistic', 'Event Coverage', 'video') THEN category
+    -- If it's something else entirely, default it to 'artistic'
+    ELSE 'artistic'
+END;
 
--- 3. Now add the new check constraint with the long names
+-- 3. Now that all data is clean, add the constraint
 ALTER TABLE portfolio ADD CONSTRAINT portfolio_category_check 
 CHECK (category IN ('Personal portrait session', 'Business headshot', 'artistic', 'Event Coverage', 'video'));
 
--- 4. Verify
+-- 4. Check the results
 SELECT DISTINCT category FROM portfolio;
