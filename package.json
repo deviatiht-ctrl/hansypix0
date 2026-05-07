@@ -1,0 +1,8 @@
+{
+  "name": "hansypix",
+  "version": "1.0.0",
+  "description": "HANSYPIX - Professional Photography Website",
+  "scripts": {
+    "build": "echo 'No build needed'"
+  }
+}
