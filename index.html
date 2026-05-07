@@ -1,24 +1,26 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/">
-    <meta name="description" content="HANSYPIX - Professional photography services for studio, outdoor, events, and video production. Capturing moments, creating memories.">
-    <meta name="keywords" content="photography, professional photographer, studio photography, outdoor photography, event photography, video production">
-    
+    <meta name="description"
+        content="HANSYPIX - Professional photography services for studio, outdoor, events, and video production. Capturing moments, creating memories.">
+    <meta name="keywords"
+        content="photography, professional photographer, studio photography, outdoor photography, event photography, video production">
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="HANSYPIX - Professional Photography">
     <meta property="og:description" content="Capturing Moments, Creating Memories">
     <meta property="og:image" content="/public/images/og-image.jpg">
     <meta property="og:type" content="website">
-    
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="HANSYPIX - Professional Photography">
     <meta name="twitter:description" content="Capturing Moments, Creating Memories">
-    
+
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#0a0a0a">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -26,21 +28,23 @@
     <meta name="apple-mobile-web-app-title" content="HANSYPIX">
     <link rel="apple-touch-icon" href="/src/logo.png">
     <link rel="manifest" href="/manifest.json">
-    
+
     <title>HANSYPIX - Professional Photography | Capturing Moments, Creating Memories</title>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
+
     <!-- GSAP Animation Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    
+
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/src/css/global.css?v=20260308">
     <link rel="stylesheet" href="/src/css/navigation.css?v=20260308">
@@ -53,6 +57,7 @@
     <link rel="stylesheet" href="/src/css/pwa.css?v=20260308">
     <link rel="stylesheet" href="/src/css/translations.css?v=20260308-5">
 </head>
+
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar" id="navbar">
@@ -62,15 +67,21 @@
                 <img src="/src/logo.png" alt="HANSYPIX Logo" class="logo-image">
                 <span>HANSYPIX</span>
             </a>
-            
+
             <!-- Desktop Navigation -->
             <ul class="nav-menu" id="navMenu">
                 <li class="nav-item"><a href="/" class="nav-link active" data-translate="nav.home">Home</a></li>
-                <li class="nav-item"><a href="/src/pages/portfolio.html" class="nav-link" data-translate="nav.portfolio">Portfolio</a></li>
-                <li class="nav-item"><a href="/src/pages/pricing.html" class="nav-link" data-translate="nav.pricing">Pricing</a></li>
-                <li class="nav-item"><a href="/src/pages/contact.html" class="nav-link" data-translate="nav.contact">Contact</a></li>
-                <li class="nav-item" id="topNavBookings" style="display: none;"><a href="/src/pages/my-bookings.html" class="nav-link" data-translate="nav.my_bookings">My Bookings</a></li>
-                <li class="nav-item mobile-only" id="mobileAdminLinkTop" style="display: none;"><a href="/src/pages/admin/dashboard.html" class="nav-link" data-translate="nav.admin_panel">Admin Panel</a></li>
+                <li class="nav-item"><a href="/src/pages/portfolio.html" class="nav-link"
+                        data-translate="nav.portfolio">Portfolio</a></li>
+                <li class="nav-item"><a href="/src/pages/pricing.html" class="nav-link"
+                        data-translate="nav.pricing">Pricing</a></li>
+                <li class="nav-item"><a href="/src/pages/contact.html" class="nav-link"
+                        data-translate="nav.contact">Contact</a></li>
+                <li class="nav-item" id="topNavBookings" style="display: none;"><a href="/src/pages/my-bookings.html"
+                        class="nav-link" data-translate="nav.my_bookings">My Bookings</a></li>
+                <li class="nav-item mobile-only" id="mobileAdminLinkTop" style="display: none;"><a
+                        href="/src/pages/admin/dashboard.html" class="nav-link" data-translate="nav.admin_panel">Admin
+                        Panel</a></li>
             </ul>
 
             <!-- Auth Buttons -->
@@ -86,10 +97,11 @@
                         <span class="lang-text">FR</span>
                     </button>
                 </div>
-                
+
                 <a href="/src/pages/login.html" class="btn-secondary" id="loginBtn" data-translate="nav.login">Login</a>
-                <a href="/src/pages/register.html" class="btn-primary" id="registerBtn" data-translate="nav.sign_up">Sign Up</a>
-                
+                <a href="/src/pages/register.html" class="btn-primary" id="registerBtn"
+                    data-translate="nav.sign_up">Sign Up</a>
+
                 <!-- User Menu (Hidden by default, shown when logged in) -->
                 <div class="user-menu" id="userMenu" style="display: none;">
                     <button class="user-avatar" id="userAvatar">
@@ -122,18 +134,19 @@
             </button>
         </div>
     </nav>
-    
+
     <!-- Hero Section with Animated Background -->
     <section class="hero" id="hero">
         <!-- Video Background -->
         <div class="hero-video-container">
-            <video class="hero-video" autoplay muted loop playsinline webkit-playsinline preload="metadata" id="heroVideo">
+            <video class="hero-video" autoplay muted loop playsinline webkit-playsinline preload="metadata"
+                id="heroVideo">
                 <source src="/src/hero.mp4" type="video/mp4">
             </video>
             <div class="hero-animated-bg"></div>
             <div class="hero-overlay"></div>
         </div>
-        
+
         <!-- Hero Content -->
         <div class="hero-content">
             <h1 class="hero-title" id="heroTitle" data-translate="hero.title">
@@ -147,109 +160,33 @@
                     <i data-lucide="calendar"></i>
                     Book a Session
                 </a>
-                <a href="/src/pages/portfolio.html" class="btn-secondary btn-large" data-translate="hero.view_portfolio">
+                <a href="/src/pages/portfolio.html" class="btn-secondary btn-large"
+                    data-translate="hero.view_portfolio">
                     <i data-lucide="image"></i>
                     View Portfolio
                 </a>
             </div>
         </div>
-        
+
         <!-- Scroll Indicator -->
         <div class="scroll-indicator">
             <i data-lucide="chevron-down"></i>
         </div>
     </section>
-    
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-translate="services.title">Our Services</h2>
-                <p class="section-subtitle" data-translate="services.subtitle">Professional photography for every moment</p>
-            </div>
-            
-            <div class="services-grid">
-                <!-- Studio Photography -->
-                <div class="service-card glass-card">
-                    <div class="service-icon">
-                        <i data-lucide="camera"></i>
-                    </div>
-                    <h3 class="service-title" data-translate="services.studio_title">Studio Photography</h3>
-                    <p class="service-description" data-translate="services.studio_description">
-                        Professional studio sessions with state-of-the-art lighting and equipment. 
-                        Perfect for headshots, portraits, and product photography.
-                    </p>
-                    <a href="/src/pages/portfolio.html?category=studio" class="service-link" data-translate="services.studio_link">
-                        View Studio Work
-                        <i data-lucide="arrow-right"></i>
-                    </a>
-                </div>
-                
-                <!-- Outdoor Photography -->
-                <div class="service-card glass-card">
-                    <div class="service-icon">
-                        <i data-lucide="sun"></i>
-                    </div>
-                    <h3 class="service-title" data-translate="services.outdoor_title">Outdoor Sessions</h3>
-                    <p class="service-description" data-translate="services.outdoor_description">
-                        Natural light photography in stunning outdoor locations. 
-                        Engagement shoots, family portraits, and lifestyle photography.
-                    </p>
-                    <a href="/src/pages/portfolio.html?category=outdoor" class="service-link" data-translate="services.outdoor_link">
-                        View Outdoor Work
-                        <i data-lucide="arrow-right"></i>
-                    </a>
-                </div>
-                
-                <!-- Event Photography -->
-                <div class="service-card glass-card">
-                    <div class="service-icon">
-                        <i data-lucide="calendar"></i>
-                    </div>
-                    <h3 class="service-title" data-translate="services.event_title">Event Coverage</h3>
-                    <p class="service-description" data-translate="services.event_description">
-                        Complete event photography for weddings, corporate events, parties, and celebrations. 
-                        Capturing every special moment.
-                    </p>
-                    <a href="/src/pages/portfolio.html?category=events" class="service-link" data-translate="services.event_link">
-                        View Event Work
-                        <i data-lucide="arrow-right"></i>
-                    </a>
-                </div>
-                
-                <!-- Video Production -->
-                <div class="service-card glass-card">
-                    <div class="service-icon">
-                        <i data-lucide="video"></i>
-                    </div>
-                    <h3 class="service-title" data-translate="services.video_title">Video Production</h3>
-                    <p class="service-description" data-translate="services.video_description">
-                        Cinematic video production for weddings, events, and promotional content. 
-                        Professional editing and storytelling.
-                    </p>
-                    <a href="/src/pages/portfolio.html?category=video" class="service-link" data-translate="services.video_link">
-                        View Video Work
-                        <i data-lucide="arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
     <!-- About Section -->
     <section class="about" id="about">
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
-                    <h2 class="section-title" data-translate="about.title">About HANSYPIX</h2>
+                    <h2 class="section-title" data-translate="about.title">About </h2>
                     <p class="about-description" id="aboutText" data-translate="about.description">
-                        HANSYPIX is a premier photography studio specializing in studio, outdoor, event, 
-                        and video production. With years of experience and a passion for visual storytelling, 
+                        HANSYPIX is a premier photography studio specializing in studio, outdoor, event,
+                        and video production. With years of experience and a passion for visual storytelling,
                         we capture your most precious moments with artistic excellence.
                     </p>
                     <p class="about-description" data-translate="about.description2">
-                        Our team of professional photographers combines technical expertise with creative vision 
-                        to deliver stunning images that you'll treasure forever. From intimate portraits to 
+                        Our team of professional photographers combines technical expertise with creative vision
+                        to deliver stunning images that you'll treasure forever. From intimate portraits to
                         grand celebrations, we're dedicated to exceeding your expectations.
                     </p>
                     <div class="about-stats">
@@ -275,61 +212,90 @@
             </div>
         </div>
     </section>
-    
-    <!-- Featured Portfolio Showcase -->
-    <section class="featured-showcase" id="featuredPortfolio">
-        <div class="showcase-background">
-            <div class="showcase-gradient"></div>
-        </div>
+    <!-- Services Section -->
+    <section class="services" id="services">
         <div class="container">
             <div class="section-header">
-                <span class="section-badge">
-                    <i data-lucide="sparkles"></i>
-                    Our Work
-                </span>
-                <h2 class="section-title">Featured Projects</h2>
-                <p class="section-subtitle">Discover our latest photography masterpieces</p>
+                <h2 class="section-title" data-translate="services.title">Our Services</h2>
+                <p class="section-subtitle" data-translate="services.subtitle">Professional photography for every moment
+                </p>
             </div>
-            
-            <!-- Main Showcase -->
-            <div class="showcase-wrapper">
-                <!-- Main Display -->
-                <div class="showcase-main" id="showcaseMain">
-                    <div class="showcase-loader">
-                        <div class="loader-ring"></div>
-                        <p>Loading amazing work...</p>
+
+            <div class="services-grid">
+                <!-- Studio Photography -->
+                <div class="service-card glass-card">
+                    <div class="service-icon">
+                        <i data-lucide="camera"></i>
                     </div>
+                    <h3 class="service-title" data-translate="services.studio_title">Studio Photography</h3>
+                    <p class="service-description" data-translate="services.studio_description">
+                        Professional studio sessions with state-of-the-art lighting and equipment.
+                        Perfect for headshots, portraits, and product photography.
+                    </p>
+                    <a href="/src/pages/portfolio.html?category=studio" class="service-link"
+                        data-translate="services.studio_link">
+                        View Studio Work
+                        <i data-lucide="arrow-right"></i>
+                    </a>
                 </div>
-                
-                <!-- Thumbnails Navigation -->
-                <div class="showcase-thumbnails" id="showcaseThumbnails">
-                    <!-- Thumbnails loaded dynamically -->
+
+                <!-- Outdoor Photography -->
+                <div class="service-card glass-card">
+                    <div class="service-icon">
+                        <i data-lucide="sun"></i>
+                    </div>
+                    <h3 class="service-title" data-translate="services.outdoor_title">Outdoor Sessions</h3>
+                    <p class="service-description" data-translate="services.outdoor_description">
+                        Natural light photography in stunning outdoor locations.
+                        Engagement shoots, family portraits, and lifestyle photography.
+                    </p>
+                    <a href="/src/pages/portfolio.html?category=outdoor" class="service-link"
+                        data-translate="services.outdoor_link">
+                        View Outdoor Work
+                        <i data-lucide="arrow-right"></i>
+                    </a>
                 </div>
-                
-                <!-- Progress Bar -->
-                <div class="showcase-progress">
-                    <div class="progress-bar" id="showcaseProgress"></div>
+
+                <!-- Event Photography -->
+                <div class="service-card glass-card">
+                    <div class="service-icon">
+                        <i data-lucide="calendar"></i>
+                    </div>
+                    <h3 class="service-title" data-translate="services.event_title">Event Coverage</h3>
+                    <p class="service-description" data-translate="services.event_description">
+                        Complete event photography for weddings, corporate events, parties, and celebrations.
+                        Capturing every special moment.
+                    </p>
+                    <a href="/src/pages/portfolio.html?category=events" class="service-link"
+                        data-translate="services.event_link">
+                        View Event Work
+                        <i data-lucide="arrow-right"></i>
+                    </a>
                 </div>
-                
-                <!-- Navigation Arrows -->
-                <button class="showcase-nav showcase-prev" id="showcasePrev">
-                    <i data-lucide="chevron-left"></i>
-                </button>
-                <button class="showcase-nav showcase-next" id="showcaseNext">
-                    <i data-lucide="chevron-right"></i>
-                </button>
-            </div>
-            
-            <div class="section-cta">
-                <a href="/src/pages/portfolio.html" class="btn-primary btn-large">
-                    <i data-lucide="images"></i>
-                    View Full Portfolio
-                    <i data-lucide="arrow-right"></i>
-                </a>
+
+                <!-- Video Production -->
+                <div class="service-card glass-card">
+                    <div class="service-icon">
+                        <i data-lucide="video"></i>
+                    </div>
+                    <h3 class="service-title" data-translate="services.video_title">Video Production</h3>
+                    <p class="service-description" data-translate="services.video_description">
+                        Cinematic video production for weddings, events, and promotional content.
+                        Professional editing and storytelling.
+                    </p>
+                    <a href="/src/pages/portfolio.html?category=video" class="service-link"
+                        data-translate="services.video_link">
+                        View Video Work
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
-    
+
+
+
+
     <!-- Testimonials Section -->
     <section class="testimonials" id="testimonials">
         <div class="container">
@@ -337,20 +303,20 @@
                 <h2 class="section-title">What Our Clients Say</h2>
                 <p class="section-subtitle">Real experiences from real people</p>
             </div>
-            
+
             <div class="testimonials-grid" id="testimonialsGrid">
                 <!-- Testimonials will be loaded from settings -->
             </div>
         </div>
     </section>
-    
+
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
             <div class="cta-content glass-card">
                 <h2 class="cta-title">Ready to Capture Your Moments?</h2>
                 <p class="cta-text">
-                    Let's create something beautiful together. Book your session today and 
+                    Let's create something beautiful together. Book your session today and
                     experience the HANSYPIX difference.
                 </p>
                 <div class="cta-buttons">
@@ -366,7 +332,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Footer -->
     <footer class="footer-modern">
         <div class="footer-glow"></div>
@@ -384,7 +350,7 @@
                     <p class="footer-tagline">
                         Capturing life's most beautiful moments through the art of photography
                     </p>
-                    
+
                     <!-- Newsletter -->
                     <div class="footer-newsletter">
                         <h5>Stay Updated</h5>
@@ -396,7 +362,7 @@
                         </form>
                     </div>
                 </div>
-                
+
                 <!-- Links Grid -->
                 <div class="footer-grid">
                     <div class="footer-column">
@@ -406,25 +372,30 @@
                         </h4>
                         <ul class="footer-nav">
                             <li><a href="/"><i data-lucide="chevron-right"></i>Home</a></li>
-                            <li><a href="/src/pages/portfolio.html"><i data-lucide="chevron-right"></i>Portfolio</a></li>
+                            <li><a href="/src/pages/portfolio.html"><i data-lucide="chevron-right"></i>Portfolio</a>
+                            </li>
                             <li><a href="/src/pages/pricing.html"><i data-lucide="chevron-right"></i>Pricing</a></li>
                             <li><a href="/src/pages/contact.html"><i data-lucide="chevron-right"></i>Contact</a></li>
                         </ul>
                     </div>
-                    
+
                     <div class="footer-column">
                         <h4 class="footer-column-title">
                             <span class="title-accent"></span>
                             Services
                         </h4>
                         <ul class="footer-nav">
-                            <li><a href="/src/pages/portfolio.html?category=studio"><i data-lucide="chevron-right"></i>Studio Sessions</a></li>
-                            <li><a href="/src/pages/portfolio.html?category=outdoor"><i data-lucide="chevron-right"></i>Outdoor Shoots</a></li>
-                            <li><a href="/src/pages/portfolio.html?category=events"><i data-lucide="chevron-right"></i>Event Coverage</a></li>
-                            <li><a href="/src/pages/portfolio.html?category=video"><i data-lucide="chevron-right"></i>Videography</a></li>
+                            <li><a href="/src/pages/portfolio.html?category=studio"><i
+                                        data-lucide="chevron-right"></i>Studio Sessions</a></li>
+                            <li><a href="/src/pages/portfolio.html?category=outdoor"><i
+                                        data-lucide="chevron-right"></i>Outdoor Shoots</a></li>
+                            <li><a href="/src/pages/portfolio.html?category=events"><i
+                                        data-lucide="chevron-right"></i>Event Coverage</a></li>
+                            <li><a href="/src/pages/portfolio.html?category=video"><i
+                                        data-lucide="chevron-right"></i>Videography</a></li>
                         </ul>
                     </div>
-                    
+
                     <div class="footer-column">
                         <h4 class="footer-column-title">
                             <span class="title-accent"></span>
@@ -462,7 +433,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Social Links Bar -->
             <div class="footer-social-bar">
                 <div class="social-text">Follow Us</div>
@@ -481,7 +452,7 @@
                     </a>
                 </div>
             </div>
-            
+
             <!-- Bottom Bar -->
             <div class="footer-bottom-bar">
                 <div class="copyright">
@@ -517,7 +488,8 @@
             <i data-lucide="message-circle"></i>
             <span>Contact</span>
         </a>
-        <a href="/src/pages/admin/dashboard.html" class="mobile-nav-item mobile-admin-btn" id="mobileAdminBtn" style="display: none;">
+        <a href="/src/pages/admin/dashboard.html" class="mobile-nav-item mobile-admin-btn" id="mobileAdminBtn"
+            style="display: none;">
             <i data-lucide="shield"></i>
             <span>Admin</span>
         </a>
@@ -530,7 +502,8 @@
     <!--// Mobile Account Menu (Hidden by default)-->
     <div class="mobile-account-menu" id="mobileAccountMenu" style="display: none;">
         <div class="account-menu-content glass-card">
-            <a href="/src/pages/admin/dashboard.html" class="account-menu-item" id="mobileAdminLink" style="display: none;">
+            <a href="/src/pages/admin/dashboard.html" class="account-menu-item" id="mobileAdminLink"
+                style="display: none;">
                 <i data-lucide="shield"></i>
                 <span>Admin Panel</span>
             </a>
@@ -549,7 +522,7 @@
             </a>
         </div>
     </div>
-    
+
     <!-- Chat Widget (Shown when logged in) -->
     <div class="chat-widget" id="chatWidget" style="display: none;">
         <button class="chat-toggle" id="chatToggle">
@@ -575,22 +548,23 @@
         </div>
     </div>
 
-<!-- Scripts -->
-<!-- Supabase CDN - Must load first -->
-<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="/src/supabase/config.js?v=20260308"></script>
-<script src="/src/js/config.js?v=20260308"></script>
-<script src="/src/js/translations.js?v=20260308-5"></script>
-<script src="/src/js/navigation.js?v=20260308"></script>
-<script src="/src/js/mobile-nav.js?v=20260308"></script>
-<script src="/src/js/home.js?v=20260308-4"></script>
-<script src="/src/js/chat.js?v=20260308"></script>
-<script src="/src/js/animations.js?v=20260308"></script>
-<script src="/src/js/pwa-install.js?v=20260308-3"></script>
+    <!-- Scripts -->
+    <!-- Supabase CDN - Must load first -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="/src/supabase/config.js?v=20260308"></script>
+    <script src="/src/js/config.js?v=20260308"></script>
+    <script src="/src/js/translations.js?v=20260308-5"></script>
+    <script src="/src/js/navigation.js?v=20260308"></script>
+    <script src="/src/js/mobile-nav.js?v=20260308"></script>
+    <script src="/src/js/home.js?v=20260308-4"></script>
+    <script src="/src/js/chat.js?v=20260308"></script>
+    <script src="/src/js/animations.js?v=20260308"></script>
+    <script src="/src/js/pwa-install.js?v=20260308-3"></script>
 
-<!-- Initialize Lucide Icons -->
-<script>
-    lucide.createIcons();
-</script>
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
+
 </html>
